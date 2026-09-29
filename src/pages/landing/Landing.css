@@ -1,0 +1,100 @@
+/* 01-landing.png at 1440px: content from x=64 to x=1376, the nav row centred on y=48. */
+.lp {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 0 64px;
+  background: var(--color-canvas);
+}
+
+.lp [id] {
+  scroll-margin-top: var(--space-7);
+}
+
+/* Nav */
+.lp-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  height: 41px;
+  margin-top: 28px;
+}
+
+.lp-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.lp-logo:hover {
+  color: var(--color-text);
+}
+
+.lp-logo__icon {
+  font-size: 24px;
+}
+
+.lp-nav__links {
+  display: flex;
+  gap: 36px;
+}
+
+.lp-nav__links a,
+.lp-nav__signin {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--size-control);
+  font-size: var(--text-md);
+  text-decoration: none;
+  transition: color var(--duration-hover) var(--ease-expo);
+}
+
+.lp-nav__links a {
+  color: var(--color-text-2);
+}
+
+.lp-nav__links a:hover {
+  color: var(--color-text);
+}
+
+.lp-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.lp-nav__signin {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.lp-nav__signin:hover {
+  color: var(--color-accent);
+}
+
+/* Footer */
+.lp-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-top: 107px;
+  padding-bottom: 32px;
+}
+
+.lp-footer__logo {
+  color: var(--color-text);
+  font-size: 17px;
+  line-height: 22px;
+}
+
+.lp-footer__meta {
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}

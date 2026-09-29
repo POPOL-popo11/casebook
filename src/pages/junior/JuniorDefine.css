@@ -1,0 +1,183 @@
+/* Define (05) at 1440×1080: Brief is 360px wide, then a 24px gap, then Frame the task;
+   both cards start at y=184 and have 28px of padding. */
+.jr-define__grid {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-6);
+  margin-top: 26px;
+}
+
+.jr-define .card {
+  padding: 25px 28px 27px;
+}
+
+.jr-brief__title,
+.jr-frame__title {
+  margin: 0;
+  line-height: 28px;
+}
+
+/* Brief */
+.jr-brief__text {
+  margin: 17px 0 0;
+  color: var(--color-text);
+  font-size: var(--text-base);
+  line-height: 24px;
+}
+
+.jr-brief__materials {
+  margin: 21px 0 0;
+  padding: 0;
+  border-bottom: 1px solid var(--color-hairline);
+  list-style: none;
+}
+
+.jr-brief__material {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  height: 43.5px;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--color-hairline);
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--text-md);
+  text-align: left;
+  cursor: pointer;
+}
+
+.jr-brief__file {
+  flex: none;
+  color: var(--color-text-3);
+  font-size: var(--text-lg);
+}
+
+.jr-brief__more {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  line-height: 18px;
+}
+
+.jr-brief__lock {
+  flex: none;
+  font-size: var(--text-xs);
+}
+
+/* Frame the task */
+.jr-frame__field {
+  gap: 6.5px;
+  margin-top: 24px;
+}
+
+.jr-frame__title + .jr-frame__field {
+  margin-top: 20px;
+}
+
+.jr-define .jr-frame {
+  padding-bottom: 29px;
+}
+
+.jr-define .field__label {
+  line-height: 18px;
+}
+
+.jr-define .input {
+  box-sizing: border-box;
+  height: 42px;
+}
+
+.jr-frame__pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.jr-frame__lists {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin-top: 22px;
+}
+
+.jr-frame__list {
+  gap: 8.5px;
+}
+
+.jr-define .chip {
+  box-sizing: border-box;
+  height: 29px;
+}
+
+.jr-define .chip:not(.chip--add) {
+  color: var(--color-text-2);
+}
+
+/* Filled chips are drawn without a border, so they are 2px narrower than outlined ones. */
+.jr-define .chip:not(.chip--dashed, .chip--add) {
+  border: 0;
+}
+
+.jr-define .chip--add {
+  width: 30px;
+  height: 30px;
+}
+
+.jr-frame__callout {
+  margin-top: 23px;
+}
+
+.jr-frame__callout p {
+  margin: 0;
+}
+
+.jr-frame__question {
+  flex: none;
+  color: var(--color-accent);
+  font-size: 18px;
+}
+
+/* The right column: Frame the task, then 'Your first position' 24px below it. */
+.jr-define__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.jr-position__hint {
+  margin: 4px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  line-height: 20px;
+}
+
+.jr-position__hint + .jr-frame__field {
+  margin-top: 18px;
+}
+
+.jr-define .jr-position__pair {
+  gap: var(--space-6);
+}
+
+.jr-position__confidence {
+  box-sizing: border-box;
+  height: 42px;
+}
+
+@media (max-width: 900px) {
+  .jr-define__grid,
+  .jr-frame__pair,
+  .jr-frame__lists,
+  .jr-define .jr-position__pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,72 @@
+/* The material reader: a card over a dimmed canvas with the shared MaterialBody inside. */
+.jr-reader {
+  box-sizing: border-box;
+  width: min(640px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100vh - 64px);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-text);
+  overflow: visible;
+}
+
+.jr-reader::backdrop {
+  background: color-mix(in srgb, var(--color-dark) 45%, transparent);
+}
+
+.jr-reader[open] {
+  animation: jr-reader-in 320ms var(--ease-standard);
+}
+
+.jr-reader__card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 64px);
+  padding: 25px 28px 28px;
+  overflow: auto;
+  box-shadow: var(--shadow-raised);
+}
+
+.jr-reader__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.jr-reader__heading {
+  min-width: 0;
+}
+
+.jr-reader__eyebrow {
+  margin: 0;
+  line-height: 16px;
+}
+
+.jr-reader__title {
+  margin: 4px 0 0;
+  line-height: 28px;
+}
+
+.jr-reader__close {
+  flex: none;
+}
+
+.jr-reader__body {
+  margin-top: 18px;
+}
+
+@keyframes jr-reader-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jr-reader[open] {
+    animation: none;
+  }
+}

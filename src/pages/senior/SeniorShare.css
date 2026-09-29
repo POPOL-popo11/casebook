@@ -1,0 +1,287 @@
+/* 02-senior-share.png: two 542px columns 24px apart; cards padded 28px. */
+.share__saved {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+.share__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.share__column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.share__card {
+  padding: 27px 28px 28px;
+}
+
+.share__card--list {
+  padding: 26px 28px 28px;
+}
+
+.share__card-title {
+  margin: 0 0 16px;
+}
+
+/* The design sets labels about 6px above their controls (the shared .field uses 8px). */
+.share__card .field {
+  gap: 6px;
+}
+
+.share__pair {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--space-3);
+  margin-bottom: 23px;
+  padding-top: 2px;
+}
+
+/* No resize grip. Each box keeps its designed height when short (Why and Outcome 2 lines, 68px)
+   and grows with its content where the browser can, so longer text is never hidden. */
+.share__textarea {
+  min-height: 68px;
+  resize: none;
+  field-sizing: content;
+}
+
+/* Background holds longer text: 3 lines when short. */
+.share__textarea--grow {
+  min-height: 92px;
+}
+
+/* Goal and limits, Modes and skills: labelled facts and chips. */
+.share__facts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.share__fact {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: var(--space-3);
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.share__fact dt {
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+.share__fact dd {
+  margin: 0;
+}
+
+.share__empty,
+.share__text {
+  margin: 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.share__sub {
+  margin: 14px 0 8px;
+}
+
+.share__sub:first-of-type {
+  margin-top: 0;
+}
+
+.share__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Materials */
+.share__card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 35px;
+  margin-bottom: 8px;
+}
+
+.share__add {
+  margin-right: 3px;
+}
+
+.share__materials {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.share__material-item {
+  border-top: 1px solid var(--color-hairline);
+}
+
+/* Each material is the summary of its own text: the row opens it. */
+.share__material {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 51px;
+  font-size: var(--text-md);
+  list-style: none;
+  cursor: pointer;
+}
+
+.share__material::-webkit-details-marker {
+  display: none;
+}
+
+.share__material::after {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: var(--icon-chevron) no-repeat center / 16px 16px;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.share__material-details[open] > .share__material::after {
+  transform: rotate(180deg);
+}
+
+.share__material:hover .share__material-name {
+  color: var(--color-accent);
+}
+
+.share__holder {
+  display: block;
+  color: var(--color-text-3);
+  font-size: var(--text-xs);
+}
+
+.share__material-body {
+  padding: 4px 0 18px 30px;
+}
+
+.share__file {
+  color: var(--color-text-3);
+  font-size: 18px;
+}
+
+.share__material-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.share__badge {
+  flex: none;
+}
+
+/* Decision */
+.share__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: 24px;
+}
+
+/* 02's options are compact 44px rows on the field colour; the pressed state is the shared one. */
+.share__option {
+  min-height: 44px;
+  padding: 0 14px;
+  background: var(--color-field);
+  font-size: var(--text-md);
+}
+
+.share__option .option__letter {
+  width: 20px;
+}
+
+.share__option-label {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+/* Sits 2px below the row's centre, on the label's baseline. */
+.share__your-call {
+  padding-top: 4px;
+  color: var(--color-accent);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+.share__why {
+  margin-bottom: 19px;
+}
+
+.share__label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.share__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-text-3);
+  font-size: var(--text-xs);
+}
+
+.share__hint .icon {
+  font-size: var(--text-md);
+}
+
+/* The privacy bar under the decision */
+.share__privacy {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 53px;
+  padding: 0 20px;
+}
+
+.share__shield {
+  color: var(--color-accent);
+  font-size: var(--text-xl);
+}
+
+.share__privacy-text {
+  flex: 1;
+  margin: 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+}
+
+/* Below the two-column width the cards stack; on phones a fact's label sits above it. */
+@media (max-width: 1100px) {
+  .share__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .share__pair,
+  .share__fact {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .share__fact {
+    gap: 2px;
+  }
+}

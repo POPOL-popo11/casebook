@@ -1,0 +1,33 @@
+/* Answer boxes that grow with the learner's text, so no sentence is ever cut off. */
+
+/* A one-line answer. Empty or short, it is the designed 42px input (9px + 22px line + 9px +
+   borders); a longer sentence wraps and the box grows. */
+.textarea.jr-line {
+  min-height: 42px;
+  padding-block: 9px;
+  field-sizing: content;
+  resize: none;
+}
+
+/* A multi-line answer. `rows` stays the smallest height (rows × line + 22px padding + 2px
+   borders, as before); longer text grows the box instead of scrolling inside it. */
+.textarea.jr-grow {
+  field-sizing: content;
+  resize: none;
+}
+
+.textarea.jr-grow[rows="2"] {
+  min-height: calc(2lh + 24px);
+}
+
+.textarea.jr-grow[rows="3"] {
+  min-height: calc(3lh + 24px);
+}
+
+.textarea.jr-grow[rows="4"] {
+  min-height: calc(4lh + 24px);
+}
+
+.textarea.jr-grow[rows="5"] {
+  min-height: calc(5lh + 24px);
+}

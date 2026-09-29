@@ -1,0 +1,229 @@
+/* 10-sign-in.png at 1440×960: an 88px top bar, then a 1180px column centred on the page. */
+.si {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--color-canvas);
+}
+
+.si-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88px;
+  padding: 0 64px;
+}
+
+/* The icon's box is wider than its ink, so it overhangs the margin by 4px. */
+.si-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: -4px;
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  font-size: 26px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.si-logo:hover {
+  color: var(--color-text);
+}
+
+.si-logo__icon {
+  font-size: 24px;
+}
+
+.si-back {
+  color: var(--color-text);
+}
+
+.si-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 0 72px;
+}
+
+.si-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 30px;
+  margin: 0;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text-2);
+  font-size: var(--text-sm);
+}
+
+.si-pill__dot {
+  width: 6px;
+  height: 6px;
+}
+
+.si-title {
+  margin: 26px 0 16px;
+  font-size: 56px;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-align: center;
+}
+
+/* The problem Casebook answers (the landing subhead), then how to sign in. */
+.si-lead {
+  max-width: 720px;
+  color: var(--color-text-2);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.si-lead p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.si-lead p + p {
+  margin-top: var(--space-2);
+}
+
+.si-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+  width: 100%;
+  margin-top: 56px;
+}
+
+.si-card {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-height: 360px;
+  padding: 28px;
+}
+
+/* A fixed row height keeps the rows of all three cards level: the taller
+   'Start here' tag overhangs the row instead of pushing the dark card's content down. */
+.si-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 18px;
+}
+
+.si-card__eyebrow {
+  margin: 0;
+}
+
+.si-card__icon {
+  color: var(--color-text);
+  font-size: 18px;
+}
+
+.si-start {
+  padding: 4px 10px;
+  border: 1px solid var(--color-dark-outline);
+  border-radius: var(--radius-pill);
+  color: var(--color-on-dark);
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: var(--tracking-eyebrow-sm);
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.si-who {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.si-avatar {
+  width: 48px;
+  height: 48px;
+  background: var(--color-sunken);
+  color: var(--color-text-2);
+  font-size: var(--text-base);
+  letter-spacing: 0;
+}
+
+.si-card--dark .si-avatar {
+  background: var(--color-dark-raised);
+  color: var(--color-on-dark);
+}
+
+.si-name {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: 0;
+  line-height: 1.1;
+}
+
+.si-role {
+  margin: 4px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-md);
+}
+
+.si-body {
+  flex: 1;
+  margin: 0;
+  color: var(--color-text-2);
+  font-size: var(--text-base);
+  line-height: 1.55;
+}
+
+.si-card--dark .si-role,
+.si-card--dark .si-body {
+  color: var(--color-on-dark-2);
+}
+
+.si-continue {
+  align-self: flex-start;
+}
+
+.si-foot {
+  margin: 32px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+/* Below the design's width: the three cards stack; on phones, a 16px gutter and a smaller title. */
+@media (max-width: 1100px) {
+  .si-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 560px;
+  }
+
+  .si-card {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .si-nav {
+    height: 64px;
+    padding: 0 var(--space-4);
+  }
+
+  .si-main {
+    padding: 24px var(--space-4) 48px;
+  }
+
+  .si-title {
+    font-size: 38px;
+  }
+
+  .si-grid {
+    margin-top: 32px;
+  }
+}

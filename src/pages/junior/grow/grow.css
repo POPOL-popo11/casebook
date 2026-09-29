@@ -1,0 +1,49 @@
+/* Shared by Work & Grow, My Growth and Feedback. */
+.gr-kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gr-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: 25px 28px 27px;
+}
+
+.gr-empty p {
+  margin: 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 22px;
+}
+
+@media (max-width: 760px) {
+  .page.gr-page {
+    padding: 28px 16px 32px;
+  }
+
+  .gr-page .page__header,
+  .gr-page .page__actions,
+  .fb-card__head {
+    flex-wrap: wrap;
+  }
+
+  /* Narrow columns: long chips, badges and buttons wrap instead of overflowing. */
+  .gr-page .chip,
+  .gr-page .badge,
+  .gr-page .btn {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .gr-page .chip {
+    padding-block: 4px;
+  }
+
+  .gr-empty {
+    padding: 20px 18px 22px;
+  }
+}

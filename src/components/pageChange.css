@@ -1,0 +1,5 @@
+/* A page's h1 takes focus when the page changes (pageChange.ts). Only script focuses it, so it
+   shows no ring: the heading is where reading starts, not a control. */
+[data-page-focus]:focus {
+  outline: none;
+}

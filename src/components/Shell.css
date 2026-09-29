@@ -1,0 +1,46 @@
+/* The canvas right of the sidebar: a full-height flex column. A page's root element grows to
+   fill it, so a page that is itself a flex column can push its action row to the bottom. */
+.shell__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 100vh;
+  margin-left: var(--sidebar-width);
+}
+
+.shell__main > :only-child {
+  flex: 1 0 auto;
+}
+
+/* The skip link focuses the canvas itself: no ring around the whole page. */
+.shell__main:focus {
+  outline: none;
+}
+
+/* 'Skip to main content': above the sidebar (z-index 10) at its top-left corner while it has
+   focus, clipped to nothing otherwise, like .visually-hidden. */
+.btn.shell__skip {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 20;
+  box-shadow: var(--shadow-raised);
+}
+
+.btn.shell__skip:not(:focus) {
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+/* Phones: no sidebar column; the content starts under the 56px top bar. */
+@media (max-width: 767.98px) {
+  .shell__main {
+    margin-left: 0;
+    padding-top: 56px;
+  }
+}

@@ -1,0 +1,15 @@
+/* Arrows match the design's glyph: 11×10 wherever they appear. */
+.icon--arrow {
+  width: 11px;
+  max-width: none; /* base.css caps svgs at 100%, which the negative margins below would shrink */
+  height: 10px;
+}
+
+/* Inside a button the arrow sits about 6px from its label (5px for ←), like "Next →". */
+.btn__arrow > .icon--arrow {
+  margin-left: -2px;
+}
+
+.btn__arrow[data-dir='back'] > .icon--arrow {
+  margin: 0 -3px 0 -1px;
+}

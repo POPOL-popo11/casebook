@@ -1,0 +1,140 @@
+/* Home (04) at 1440×1080: content from x=284 to x=1376; the dark card at y=138–318;
+   then 'More cases' (788px) and the 272px aside, 32px apart, from y=359. */
+.jr-home {
+  box-sizing: border-box;
+  padding: 54px 64px 64px;
+}
+
+.jr-home__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.jr-home__greeting {
+  margin: 0;
+  font-size: 40px;
+  line-height: 48px;
+}
+
+.jr-search {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 270px;
+}
+
+.jr-search__icon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  color: var(--color-text-3);
+  font-size: var(--text-lg);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.jr-home .jr-search__input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 42px;
+  padding: 0 16px 0 38px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-size: var(--text-md);
+}
+
+/* The dark 'Recommended for you' card. */
+.jr-home .jr-hero {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  height: 180px;
+  margin-top: 37px;
+  padding: 40px 44px;
+  border-radius: 22px; /* 04 hero card; --radius-card-xl is 24px */
+}
+
+.jr-hero__eyebrow {
+  margin: 0;
+  line-height: 16px;
+}
+
+.jr-hero__title {
+  margin: 10px 0 0;
+  color: inherit;
+  font-size: var(--title-role);
+  line-height: 44px;
+}
+
+.jr-hero__text {
+  margin-bottom: -2px;
+}
+
+.jr-hero__meta {
+  margin: 12px 0 0;
+  color: var(--color-on-dark-2);
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.jr-home .jr-hero__start {
+  flex: none;
+  gap: 4px;
+  margin-bottom: -1px;
+  height: 48px;
+  padding: 0 26px;
+}
+
+.jr-home__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 272px;
+  align-items: start;
+  gap: 32px;
+  margin-top: 40px;
+}
+
+/* Phones (the shell's top bar): 16px gutters; the search under the greeting, the hero's button
+   under its text, and the case list above the aside in one column. */
+@media (max-width: 767.98px) {
+  .jr-home {
+    padding: 24px var(--space-4) 32px;
+  }
+
+  .jr-home__head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-4);
+  }
+
+  .jr-home__greeting {
+    font-size: var(--title-case);
+    line-height: 40px;
+  }
+
+  .jr-search {
+    width: auto;
+  }
+
+  .jr-home .jr-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    height: auto;
+    margin-top: 24px;
+    padding: 28px 24px;
+  }
+
+  .jr-hero__title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .jr-home__grid {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 32px;
+  }
+}

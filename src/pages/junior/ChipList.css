@@ -1,0 +1,45 @@
+/* Chips the learner writes (People involved on Define, Missing on Examine): a small remove
+   button inside each chip, and the field the dashed '+' opens, drawn as a chip-sized input. */
+.jr-chip {
+  gap: 4px;
+}
+
+.jr-chip__remove {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-right: -4px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--color-text-3);
+  font: inherit;
+  font-size: var(--text-md);
+  line-height: 1;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+/* A 44px-tall target around the small cross. */
+.jr-chip__remove::after {
+  content: '';
+  position: absolute;
+  inset: -14px -6px;
+}
+
+.jr-chip__remove:hover {
+  color: var(--color-text);
+}
+
+.jr-chips .input.jr-chipadd {
+  box-sizing: border-box;
+  width: 180px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+}

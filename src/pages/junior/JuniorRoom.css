@@ -1,0 +1,179 @@
+/* The Team Decision Room (new, no design image): the case header, its eyebrow naming the room,
+   then a 360px column (brief, participants, shared evidence, open questions) beside the main
+   column (initial position, discussion, conflicts, joint recommendation, reflection). */
+/* After Submit: what changed, then the next step; the link drops under the text when narrow. */
+.jr-room__done {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+  margin-top: 26px;
+}
+
+.jr-room__donetext {
+  flex: 1 1 420px;
+  margin: 0;
+}
+
+.jr-room__grid {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-6);
+  margin-top: 26px;
+}
+
+.jr-room__side,
+.jr-room__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.jr-room .card {
+  padding: 25px 28px 27px;
+}
+
+.jr-room-card__eyebrow {
+  margin: 0 0 4px;
+  line-height: 16px;
+}
+
+.jr-room-card__title {
+  margin: 0;
+  line-height: 28px;
+}
+
+.jr-room-card__text {
+  margin: 8px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 21px;
+}
+
+.jr-room-card__label {
+  margin: 16px 0 0;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.jr-room-card__note {
+  margin: 14px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  line-height: 19px;
+}
+
+/* My role brief */
+.jr-knows {
+  margin: 8px 0 0;
+  padding: 0;
+  border-bottom: 1px solid var(--color-hairline);
+  list-style: none;
+}
+
+.jr-knows__item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 10px 0;
+  border-top: 1px solid var(--color-hairline);
+  color: var(--color-text);
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.jr-knows__item > .badge,
+.jr-knows__share {
+  flex: none;
+}
+
+.jr-room-rows {
+  margin: 16px 0 0;
+}
+
+.jr-room-rows div + div {
+  margin-top: 10px;
+}
+
+.jr-room-rows dt {
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.jr-room-rows dd {
+  margin: 2px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+/* Participants */
+.jr-people {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jr-people__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--text-md);
+}
+
+.jr-people__name {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Fields shared by the room's cards */
+.jr-room-field {
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.jr-room-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.jr-room-confidence {
+  box-sizing: border-box;
+  height: 42px;
+}
+
+.jr-room__submit {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.jr-room__submit p {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 1000px) {
+  .jr-room__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .jr-room-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .jr-room__submit {
+    flex-wrap: wrap;
+  }
+}

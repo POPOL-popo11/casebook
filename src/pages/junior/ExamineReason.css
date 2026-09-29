@@ -1,0 +1,45 @@
+/* Examine in practice and example modes: the read-only card with its reason, the 'Why here?'
+   field under a placed card, and narrow screens. Split from JuniorExamine.css. */
+/* A read-only card (the example, or a submitted attempt), with its reason as the last line. */
+.jr-fact__card--static {
+  cursor: default;
+}
+
+.jr-fact__why {
+  margin-top: 2px;
+  color: var(--color-text-2);
+  font-size: var(--text-sm);
+  line-height: 18px;
+}
+
+/* In practice, a placed card has a 'Why here?' field just under it. */
+/* One 34px line; a longer reason wraps and grows the box. */
+.jr-examine .textarea.jr-fact__reason {
+  box-sizing: border-box;
+  min-height: 34px;
+  margin-top: 6px;
+  padding: 6px 12px;
+  font-size: var(--text-sm);
+  line-height: 20px;
+}
+
+@media (max-width: 900px) {
+  .jr-tray {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .jr-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .jr-missing {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 560px) {
+  .jr-board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

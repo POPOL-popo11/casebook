@@ -1,0 +1,236 @@
+/* Examine (06) at 1440×1080: the dashed tray at y=238–334, four 265px columns from
+   y=363 that grow to the Missing row, and the Missing chips at y=930. */
+.jr-examine__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-top: 22px;
+}
+
+.jr-examine__title {
+  margin: 0;
+  line-height: 36px;
+}
+
+.jr-examine__hint {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+/* The unsorted tray: a label and the unsorted cards in one row. */
+.jr-tray {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 96px;
+  margin-top: 23px;
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  box-shadow: none;
+}
+
+/* Once every card is placed (and in the example), the empty tray keeps only its label row. */
+.jr-tray:not(:has(.jr-fact)) {
+  min-height: 0;
+}
+
+.jr-tray__label {
+  flex: none;
+  margin: 0;
+  padding: 0 6px 0 8px;
+  line-height: 16px;
+}
+
+.jr-tray__list {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 12px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jr-tray__list > .jr-fact {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+/* The board: four equal columns that fill the height left above the Missing row. */
+.jr-board {
+  display: grid;
+  flex: 1 0 auto;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+  min-height: 240px;
+  margin-top: 29px;
+}
+
+.jr-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-bottom: 15px;
+  border-radius: var(--radius-lg);
+  background: var(--color-sunken);
+}
+
+.jr-column__head {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  margin: 0;
+  padding: 3px 20px 0;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+.jr-column__name {
+  flex: 1;
+  min-width: 0;
+}
+
+.jr-column__count {
+  color: var(--color-text-3);
+  font-size: var(--text-xs);
+  font-weight: 400;
+}
+
+.jr-column__list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin: 0;
+  padding: 0 16px;
+  list-style: none;
+}
+
+/* The legend dots on the board are 10px. */
+.jr-column__head .dot {
+  width: 10px;
+  height: 10px;
+}
+
+/* Cards on the board have no visible border, only their shadow. */
+.jr-column .jr-fact__card {
+  border-color: transparent;
+}
+
+/* A fact card and its 'Move to…' menu. */
+.jr-fact {
+  position: relative;
+}
+
+.jr-fact__card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 13.5px 16px 12px;
+  border-radius: var(--radius-md);
+  cursor: grab;
+}
+
+.jr-fact__title {
+  color: var(--color-text);
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.jr-fact__source {
+  color: var(--color-text-3);
+  font-size: var(--text-xs);
+  line-height: 16px;
+}
+
+.jr-move {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  min-width: 168px;
+  padding: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+  transform-origin: top left;
+  animation: jr-move-in 200ms var(--ease-standard);
+}
+
+.jr-move__label {
+  margin: 0;
+  padding: 4px 8px 6px;
+  color: var(--color-text-3);
+  font-size: var(--text-xs);
+}
+
+.jr-move__item {
+  padding: 6px 8px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text-2);
+  font: inherit;
+  font-size: var(--text-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.jr-move__item:hover,
+.jr-move__item:focus-visible {
+  background: var(--color-sunken);
+  color: var(--color-text);
+}
+
+@keyframes jr-move-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jr-move {
+    animation: none;
+  }
+}
+
+/* Missing: the label and outline chips under the board. */
+.jr-missing {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 27.5px 0 -1px;
+}
+
+.jr-missing__label {
+  color: var(--color-text);
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+.jr-missing .jr-chips {
+  gap: 12px;
+}
+
+.jr-missing .chip {
+  box-sizing: border-box;
+  height: 34px;
+  padding: 0 14px;
+}
+
+.jr-missing .chip--add {
+  width: 32px;
+  height: 32px;
+}

@@ -1,0 +1,156 @@
+/* 09-manager-review.png: a 744px column beside a 340px column, 24px apart. */
+/* 37px (the designer's measure) with the tracking the report gives for 36 to 52px titles. */
+.mr .page__title {
+  font-size: 37px;
+  letter-spacing: -0.025em;
+}
+
+.mr .page__subtitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+  font-size: var(--text-md);
+}
+
+.mr.page {
+  padding-top: 42px;
+}
+
+.mr .page__header {
+  margin-bottom: 25px;
+}
+
+/* 'All reviews' sits where the design's 'Full answers →' was: a 44px target at the header's foot. */
+.mr__back {
+  min-height: var(--size-control);
+  margin: 0 4px -1px 0;
+  color: var(--color-text-2);
+}
+
+.mr__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.mr__main,
+.mr__side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.mr__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+/* The version switcher: one segment per submitted version. */
+.rv-versions {
+  padding: 16px 20px;
+}
+
+.rv-versions__switch {
+  flex-wrap: wrap;
+}
+
+.rv-versions__switch .segmented__item {
+  flex: 0 1 auto;
+  padding: 0 var(--space-3);
+}
+
+.rv-versions__why {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 14px 0 0;
+  font-size: var(--text-md);
+  line-height: 20px;
+  white-space: pre-wrap;
+}
+
+/* The comparison with the Case Expert's reference, closed until opened. */
+.rv-compare > .rv-compare__summary {
+  min-height: 0;
+  padding-block: 0;
+}
+
+.rv-compare__summary .rv-item__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.rv-compare__lead {
+  font-size: var(--text-sm);
+}
+
+.rv-compare__points {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 18px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--color-hairline);
+  list-style: none;
+}
+
+.rv-compare__title {
+  margin: 0 0 var(--space-2);
+}
+
+.rv-compare__reason {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+/* Messages and evidence in a room: who, then what was said. */
+.rv-msg {
+  padding: 12px 0;
+}
+
+.rv-msg__line {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  font-size: var(--text-md);
+  line-height: 20px;
+  white-space: pre-wrap;
+}
+
+.rv-msg__reply {
+  margin-top: 10px;
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--color-border);
+  color: var(--color-text-2);
+}
+
+.rv-msg__who {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-3);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  white-space: normal;
+}
+
+.rv-card__list {
+  margin-top: 14px;
+}
+
+/* Below the two-column width the feedback column moves under the answers. */
+@media (max-width: 1100px) {
+  .mr__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

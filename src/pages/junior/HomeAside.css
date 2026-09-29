@@ -1,0 +1,90 @@
+/* The aside on Home (04): Your skills and the latest feedback, 272px wide. */
+.jr-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.jr-home .jr-skills {
+  padding: 24px 26px 26px;
+}
+
+.jr-skills__title {
+  margin: 0;
+  font-size: 21px;
+  line-height: 26px;
+}
+
+/* Where the levels come from, under the title */
+.jr-skills__note {
+  margin: 6px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-xs);
+  line-height: 17px;
+}
+
+.jr-skills__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16.5px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jr-skill__row {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 8px;
+  color: var(--color-text);
+  font-size: var(--text-md);
+  line-height: 18px;
+}
+
+.jr-skill__focus {
+  color: var(--color-warn-ink);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+/* A skill's latest evidence level, in the place of the old 0–5 bar. */
+.jr-skill__level {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+
+.jr-feedback__demo {
+  margin-left: auto;
+}
+
+.jr-feedback__none {
+  margin: 12px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 21px;
+}
+
+.jr-feedback {
+  padding: 26px;
+  border-radius: var(--radius-lg);
+  background: var(--color-accent-soft);
+}
+
+.jr-feedback__from {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: var(--color-text-2);
+  font-size: var(--text-sm);
+}
+
+.jr-feedback__quote {
+  margin: 15px 0 0;
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  line-height: 26.5px;
+}

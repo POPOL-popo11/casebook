@@ -1,0 +1,1071 @@
+/*
+  Shared classes for Casebook. State lives in attributes, never extra classes:
+  aria-pressed="true" (chip, option, segmented__item), aria-current="page" (navitem),
+  data-state="done|current|todo" (steps__item), data-on="true" (skillbar__seg),
+  data-tone="warn" (skillbar), data-revealed="true" (reveal).
+  Values come from tokens.css. Motion animates transform, opacity, colour, background-color
+  and border-color only, never "all".
+*/
+
+/* ===== Icon ===================================================================== */
+
+.icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: -0.125em;
+  /* stroke-width is left to each SVG: a CSS value here would override the icon's own attribute. */
+}
+
+/* ===== Buttons ==================================================================
+   Natural height is 42.7px (the design), plus 2px when a border is present, exactly as
+   in the design. A ::before widens the hit area to at least 44px without changing the look. */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 12px 22px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: 1.336;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color var(--duration-hover) var(--ease-expo),
+    color var(--duration-hover) var(--ease-expo),
+    border-color var(--duration-hover) var(--ease-expo),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: -1px 0;
+}
+
+.btn:active:not(:disabled, [aria-disabled="true"]) {
+  transform: scale(0.98);
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: var(--shadow-primary);
+}
+
+.btn--primary:hover:not(:disabled, [aria-disabled="true"]) {
+  background: var(--color-accent-hover);
+  color: var(--color-on-accent);
+}
+
+.btn--secondary {
+  padding: 12px 20.5px;
+  border: 1px solid var(--color-border-control);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.btn--secondary:hover:not(:disabled, [aria-disabled="true"]) {
+  border-color: var(--color-border-strong);
+  background: var(--color-sunken);
+  color: var(--color-text);
+}
+
+.btn--dark {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.btn--dark:hover:not(:disabled, [aria-disabled="true"]) {
+  background: var(--color-dark-raised);
+  color: var(--color-on-dark);
+}
+
+.btn--light {
+  background: var(--color-canvas);
+  color: var(--color-dark);
+}
+
+.btn--light:hover:not(:disabled, [aria-disabled="true"]) {
+  background: var(--color-surface);
+  color: var(--color-dark);
+}
+
+/* Outline pill on a dark surface (the CTA band's 'Browse cases'). Not in the contract. */
+.btn--outline-dark {
+  border: 1px solid var(--color-dark-outline);
+  background: transparent;
+  color: var(--color-on-dark);
+}
+
+.btn--outline-dark:hover:not(:disabled, [aria-disabled="true"]) {
+  border-color: var(--color-on-dark);
+  background: var(--color-on-dark);
+  color: var(--color-dark);
+}
+
+.btn--link {
+  padding: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-accent);
+  box-shadow: none;
+}
+
+.btn--link::before {
+  inset: -12px -6px;
+}
+
+.btn--link:hover:not(:disabled, [aria-disabled="true"]) {
+  background: transparent;
+  color: var(--color-accent-hover);
+}
+
+.btn--link:active:not(:disabled, [aria-disabled="true"]) {
+  transform: none;
+}
+
+.btn--pill {
+  padding: 16px 28px;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-base);
+  line-height: 1.336;
+}
+
+.btn--pill.btn--primary {
+  box-shadow: var(--shadow-primary-lg);
+}
+
+.btn--pill.btn--secondary:hover:not(:disabled, [aria-disabled="true"]) {
+  border-color: var(--color-text);
+  background: var(--color-text);
+  color: var(--color-surface);
+}
+
+/* Landing pills: the white 'Share a case' pill is 48px tall beside a 52px primary (centre them in a row),
+   and the outline pill on the dark CTA band is 52px with its border inside. */
+.btn--pill.btn--secondary {
+  padding: 13px 25px;
+}
+
+.btn--pill.btn--outline-dark {
+  padding: 15px 26px;
+}
+
+.btn--dark.btn--pill {
+  padding: 11px 20px;
+  font-size: var(--text-md);
+}
+
+.btn--block {
+  display: flex;
+  width: 100%;
+}
+
+/* Small buttons: 'Yes', 'No', 'Edit', 'Request', 'Voice note'. Not in the contract. */
+.btn--sm {
+  padding: 8px 14px;
+  font-size: var(--text-sm);
+}
+
+/* The arrow inside a button slides out to the right and back in from the left on hover.
+   Only the arrow moves; the label stays put. data-dir="back" mirrors it for the left arrow. */
+.btn__arrow {
+  display: inline-block;
+  line-height: inherit;
+}
+
+@keyframes btn-arrow-forward {
+  0% { transform: translateX(0); opacity: 1; }
+  33% { transform: translateX(14px); opacity: 0; }
+  34% { transform: translateX(-14px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes btn-arrow-back {
+  0% { transform: translateX(0); opacity: 1; }
+  33% { transform: translateX(-14px); opacity: 0; }
+  34% { transform: translateX(14px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+.btn:hover:not(:disabled, [aria-disabled="true"]) .btn__arrow {
+  animation: btn-arrow-forward 0.6s ease;
+}
+
+.btn:hover:not(:disabled, [aria-disabled="true"]) .btn__arrow[data-dir="back"] {
+  animation-name: btn-arrow-back;
+}
+
+/* ===== Cards ====================================================================== */
+
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.card--dark {
+  border-color: transparent;
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  box-shadow: none;
+}
+
+.card--dashed {
+  border: 1px dashed var(--color-border-dashed);
+  background: transparent;
+  box-shadow: none;
+}
+
+/* ===== Type ======================================================================== */
+
+.eyebrow {
+  margin: 0;
+  color: var(--color-text-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  font-weight: 400;
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+/* The smaller eyebrow: case header, UNSORTED, UNLOCKED. Not in the contract. */
+.eyebrow--sm {
+  font-size: var(--text-eyebrow-sm);
+  letter-spacing: var(--tracking-eyebrow-sm);
+}
+
+.card--dark .eyebrow,
+.eyebrow--on-dark {
+  color: var(--color-on-dark-3);
+}
+
+.title {
+  margin: 0;
+  color: inherit;
+  font-family: var(--font-serif);
+  font-size: var(--title-md);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.title em {
+  font-style: italic;
+}
+
+.title--xl {
+  font-size: var(--title-xl);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+.title--lg {
+  font-size: var(--title-lg);
+  letter-spacing: -0.0175em;
+  line-height: 1.12;
+}
+
+.title--md {
+  font-size: var(--title-md);
+  letter-spacing: -0.011em;
+  line-height: 1.2;
+}
+
+.title--sm {
+  font-size: var(--title-sm);
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+
+.link {
+  color: var(--color-accent);
+  text-decoration: none;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color var(--duration-hover) var(--ease-expo);
+}
+
+.link:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+/* ===== Form controls ================================================================= */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.field__label {
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.input,
+.textarea,
+.select {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-field);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: 400;
+  line-height: 1.571;
+  -webkit-appearance: none;
+  appearance: none;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.input,
+.select {
+  height: 42px;
+  padding: 0 14px;
+}
+
+.textarea {
+  min-height: 68px;
+  padding: 11px 14px;
+  resize: none;
+}
+
+.select {
+  padding-right: 40px;
+  background-image: var(--icon-chevron);
+  background-position: right 14px center;
+  background-repeat: no-repeat;
+  background-size: 14px 14px;
+  cursor: pointer;
+}
+
+.input:hover,
+.textarea:hover,
+.select:hover {
+  border-color: var(--color-border-control);
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: var(--color-accent);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--color-text-3);
+}
+
+/* ===== Chips ========================================================================= */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 11.5px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-chip);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: nowrap;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+button.chip {
+  cursor: pointer;
+}
+
+.chip--dashed {
+  min-height: 30px;
+  padding: 0 10.5px;
+  border: 1px dashed var(--color-border-strong);
+  background: transparent;
+  color: var(--color-text-2);
+}
+
+.chip--outline {
+  min-height: 31px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border-control);
+  background: var(--color-surface);
+}
+
+button.chip--outline:hover {
+  border-color: var(--color-border-strong);
+}
+
+.chip--add {
+  justify-content: center;
+  width: 30px;
+  min-height: 30px;
+  padding: 0;
+  border: 1px dashed var(--color-accent-line);
+  background: transparent;
+  color: var(--color-accent);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.chip--add:hover {
+  background: var(--color-accent-soft);
+}
+
+.chip[aria-pressed] {
+  min-height: 30px;
+  padding: 0 10.5px;
+  border: 1px solid var(--color-border-control);
+  background: var(--color-surface);
+  font-weight: 600;
+}
+
+.chip[aria-pressed="true"] {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.chip[aria-pressed="false"]:hover {
+  border-color: var(--color-border-strong);
+}
+
+/* ===== Badges ======================================================================== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 23px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-chip);
+  color: var(--color-text-2);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.badge .icon {
+  font-size: 13px;
+}
+
+/* Badges that carry an icon ('At start', 'On request', 'Requested') are taller in the design. */
+.badge:has(.icon) {
+  min-height: 26px;
+}
+
+.badge--accent {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.badge--warn {
+  background: var(--color-warn-soft);
+  color: var(--color-warn-ink);
+}
+
+.badge--neutral {
+  background: var(--color-chip);
+  color: var(--color-text-2);
+}
+
+/* ===== Segmented control ============================================================== */
+
+.segmented {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--radius-sm);
+  background: var(--color-chip);
+}
+
+.segmented__item {
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 35px;
+  padding: 0 var(--space-1);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-text-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.segmented__item:hover {
+  color: var(--color-text);
+}
+
+.segmented__item[aria-pressed="true"] {
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 600;
+  box-shadow: var(--shadow-item);
+}
+
+/* The role switcher in the sidebar. */
+.segmented--dark {
+  border-radius: 10px;
+  background: var(--color-dark-track);
+}
+
+.segmented--dark .segmented__item {
+  min-height: 30px;
+  padding: 0 var(--space-1);
+  border-radius: 8px;
+  color: var(--color-on-dark-2);
+  font-size: var(--text-xs);
+}
+
+.segmented--dark .segmented__item:hover {
+  color: var(--color-on-dark);
+}
+
+.segmented--dark .segmented__item[aria-pressed="true"] {
+  background: var(--color-panel);
+  color: var(--color-dark);
+  box-shadow: none;
+}
+
+.segmented--dark .segmented__item:focus-visible {
+  outline-color: var(--color-focus-on-dark);
+}
+
+/* ===== Decision option ================================================================= */
+
+.option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  min-height: 76px;
+  padding: 18px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.option:hover {
+  border-color: var(--color-border-strong);
+}
+
+/* Pressed adds a second pixel of border with an inset shadow, so nothing shifts. */
+.option[aria-pressed="true"] {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+
+.option__letter {
+  flex: none;
+  width: 25px;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.option[aria-pressed="true"] .option__letter {
+  color: var(--color-accent);
+}
+
+.option > .icon:last-child {
+  flex: none;
+  margin-left: auto;
+  color: var(--color-accent);
+  font-size: 19px;
+}
+
+/* ===== Steps: Define, Examine, Investigate, Decide ====================================== */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps__item {
+  position: relative;
+  display: block;
+  padding-top: 13px;
+  color: var(--color-text-4);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+.steps__item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-track);
+  transform-origin: left center;
+}
+
+.steps__item[data-state="done"] {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.steps__item[data-state="current"] {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.steps__item[data-state="done"]::before,
+.steps__item[data-state="current"]::before {
+  background: var(--color-accent);
+}
+
+.steps__item[data-state="current"]::before {
+  animation: bar-fill var(--duration-fill) var(--ease-expo) both;
+}
+
+a.steps__item:hover {
+  color: var(--color-text);
+}
+
+/* ===== Meter and skill bar ================================================================ */
+
+.meter {
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--color-track);
+}
+
+.meter__fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  transform-origin: left center;
+  animation: bar-fill var(--duration-fill) var(--ease-expo) both;
+  transition: width var(--duration-fill) var(--ease-expo);
+}
+
+.skillbar {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.skillbar__seg {
+  height: 5px;
+  border-radius: 3px;
+  background: var(--color-track-soft);
+  transform-origin: left center;
+}
+
+.skillbar__seg[data-on="true"] {
+  background: var(--color-accent);
+  animation: bar-fill var(--duration-fill) var(--ease-expo) both;
+}
+
+.skillbar[data-tone="warn"] .skillbar__seg[data-on="true"] {
+  background: var(--color-warn);
+}
+
+.skillbar__seg:nth-child(2) { animation-delay: 60ms; }
+.skillbar__seg:nth-child(3) { animation-delay: 120ms; }
+.skillbar__seg:nth-child(4) { animation-delay: 180ms; }
+.skillbar__seg:nth-child(5) { animation-delay: 240ms; }
+
+@keyframes bar-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ===== Avatar, sidebar row, count, dot ===================================================== */
+
+.avatar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-chip);
+  color: var(--color-text);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.avatar--dark {
+  width: 32px;
+  height: 32px;
+  background: var(--color-dark-avatar);
+  color: var(--color-on-dark);
+  font-size: var(--text-xs);
+}
+
+.avatar--accent {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.navitem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 38px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-on-dark-2);
+  font-size: var(--text-md);
+  font-weight: 400;
+  line-height: 1.3;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.navitem:hover {
+  background: var(--color-dark-track);
+  color: var(--color-on-dark);
+}
+
+.navitem[aria-current="page"] {
+  background: var(--color-dark-raised);
+  color: var(--color-on-dark);
+  font-weight: 500;
+}
+
+.navitem .icon {
+  font-size: 16px;
+}
+
+.navitem:focus-visible {
+  outline-color: var(--color-focus-on-dark);
+  outline-offset: -2px;
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 16px;
+  margin-left: auto;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-panel);
+  color: var(--color-dark);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.dot {
+  display: inline-block;
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.dot--accent { background: var(--color-accent); }
+.dot--neutral { background: var(--color-neutral); }
+.dot--warn { background: var(--color-warn); }
+
+.dot--ring {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--color-accent);
+}
+
+/* ===== Callout ================================================================================ */
+
+.callout {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  border-radius: var(--radius-sm-plus);
+  background: var(--color-accent-soft);
+  color: var(--color-text);
+  font-size: var(--text-md);
+  line-height: 1.5;
+}
+
+.callout > .icon {
+  color: var(--color-accent);
+  font-size: 18px;
+}
+
+.callout--warn {
+  background: var(--color-warn-soft);
+  color: var(--color-warn-deep);
+}
+
+.callout--warn > .icon,
+.callout--warn .btn--link {
+  color: inherit;
+}
+
+.callout--warn .btn--link:hover:not(:disabled, [aria-disabled="true"]) {
+  color: var(--color-warn-ink);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  white-space: nowrap;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}
+
+/* ===== Motion: text reveal, step slide ======================================================
+   .reveal is invisible until data-revealed="true", then rises and fades in over
+   --duration-reveal. Title, body and button rise different distances and start one
+   --reveal-stagger apart. A --reveal-delay custom property on the element adds to the
+   stagger so groups can cascade. */
+
+.reveal {
+  --reveal-distance: var(--reveal-distance-title);
+  --reveal-base: 0ms;
+  --reveal-delay: 0ms; /* set on the element to cascade a group */
+  opacity: 0;
+}
+
+.reveal--title {
+  --reveal-distance: var(--reveal-distance-title);
+  --reveal-base: 0ms;
+}
+
+.reveal--body {
+  --reveal-distance: var(--reveal-distance-body);
+  --reveal-base: var(--reveal-stagger);
+}
+
+.reveal--button {
+  --reveal-distance: var(--reveal-distance-button);
+  --reveal-base: calc(var(--reveal-stagger) * 2);
+}
+
+.reveal[data-revealed="true"] {
+  animation: reveal-rise var(--duration-reveal) var(--ease-expo) both;
+  animation-delay: calc(var(--reveal-base) + var(--reveal-delay));
+}
+
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance));
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* If scripting is off nothing would ever set data-revealed, so show everything. */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+  }
+}
+
+/* The body of a junior step slides in from the right (forward) or left (back). */
+.enter-next {
+  animation: enter-from-right var(--duration-step) var(--ease-expo) both;
+}
+
+.enter-back {
+  animation: enter-from-left var(--duration-step) var(--ease-expo) both;
+}
+
+@keyframes enter-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes enter-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===== Reduced motion: show everything at once, no slides, no fills, instant colour ========= */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal[data-revealed="true"] {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .enter-next,
+  .enter-back,
+  .btn__arrow,
+  .btn:hover .btn__arrow,
+  .btn:hover .btn__arrow[data-dir="back"],
+  .steps__item[data-state="current"]::before,
+  .meter__fill,
+  .skillbar__seg[data-on="true"] {
+    animation: none;
+  }
+
+  .btn,
+  .btn:active,
+  .chip,
+  .segmented__item,
+  .option,
+  .navitem,
+  .link,
+  .input,
+  .textarea,
+  .select,
+  .meter__fill {
+    transition: none;
+  }
+
+  .btn:active:not(:disabled, [aria-disabled="true"]) {
+    transform: none;
+  }
+}
+
+/* ===== Focus on dark surfaces, disabled controls ============================================== */
+
+.card--dark :focus-visible,
+.btn--light:focus-visible,
+.btn--outline-dark:focus-visible {
+  outline-color: var(--color-focus-on-dark);
+}
+
+.input:disabled,
+.textarea:disabled,
+.select:disabled,
+.option:disabled,
+button.chip:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ===== Hit areas ===============================================================================
+   The design draws several controls smaller than 44px. Their look stays as designed; an invisible
+   pseudo-element widens the target to at least 44px. */
+
+.btn--sm::before {
+  inset: -6px 0;
+}
+
+button.chip,
+.segmented__item {
+  position: relative;
+}
+
+button.chip::after,
+.segmented__item::after {
+  content: "";
+  position: absolute;
+  inset: -8px -2px;
+}
+
+.segmented--dark .segmented__item::after {
+  inset: -7px -2px;
+}

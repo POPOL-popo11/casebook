@@ -1,0 +1,142 @@
+/* Shared Growth: one card per share; each shared record beside the Team Lead's feedback on it. */
+.sg-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sg-share {
+  padding: 22px 28px 8px;
+}
+
+.sg-share__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sg-share__heading {
+  min-width: 0;
+}
+
+.sg-share__title {
+  margin: 0;
+  font-size: 21px;
+}
+
+.sg-share__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+.sg-share__items {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sg-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--space-6);
+  align-items: start;
+  padding: 20px 0;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.sg-fb {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.sg-fb__open {
+  align-self: flex-start;
+}
+
+.sg-fb__sent {
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-soft);
+}
+
+.sg-fb__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px;
+  color: var(--color-text-3);
+  font-size: var(--text-xs);
+}
+
+.sg-fb__line {
+  margin: 0;
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.sg-fb__line + .sg-fb__line {
+  margin-top: 4px;
+}
+
+.sg-fb__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sg-fb__form .field__label {
+  margin: 0;
+}
+
+/* Two lines when short (the designed 68px); longer feedback grows the box instead of hiding. */
+.sg-fb__form .textarea {
+  min-height: 68px;
+  field-sizing: content;
+}
+
+.sg-fb__focus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.sg-fb__missing {
+  margin: 0;
+  color: var(--color-warn-ink);
+  font-size: var(--text-sm);
+}
+
+.sg-fb__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.sg-empty {
+  padding: 24px 28px;
+}
+
+.sg-empty .title {
+  margin: 0;
+}
+
+.sg-empty p {
+  margin: 8px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+}
+
+@media (max-width: 1100px) {
+  .sg-item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+}

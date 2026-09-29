@@ -1,0 +1,80 @@
+/* A material's text in the Define brief's size, its tables a step smaller, and source, date and
+   scope as small labelled rows under a hairline. The parent sets the width and any card around it. */
+.material-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+.material-body__text {
+  color: var(--color-text);
+  font-size: var(--text-base);
+  line-height: 24px;
+}
+
+.material-body__text p {
+  margin: 0;
+}
+
+.material-body__text > * + * {
+  margin-top: 10px;
+}
+
+/* A wide table scrolls on its own instead of widening the page. */
+.material-body__scroll {
+  overflow-x: auto;
+}
+
+.material-body__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.material-body__table th,
+.material-body__table td {
+  padding: 8px 12px 8px 0;
+  border-bottom: 1px solid var(--color-hairline);
+  text-align: left;
+  vertical-align: top;
+}
+
+.material-body__table th {
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.material-body__empty {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-md);
+}
+
+.material-body__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.material-body__row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 20px;
+}
+
+.material-body__row dt {
+  color: var(--color-text-3);
+}
+
+.material-body__row dd {
+  margin: 0;
+  color: var(--color-text-2);
+}

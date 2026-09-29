@@ -1,0 +1,170 @@
+/* Feedback (no design image): one card per piece of Team Lead feedback, the cards of 09. */
+.fb__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.fb-card {
+  padding: 24px 28px 26px;
+}
+
+.fb-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.fb-card .avatar {
+  width: 32px;
+  height: 32px;
+  font-size: var(--text-xs);
+}
+
+.fb-card__who {
+  min-width: 0;
+}
+
+.fb-card__from {
+  margin: 0;
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.fb-card__date {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  line-height: 18px;
+}
+
+.fb-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.fb-card__about {
+  margin: 16px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+}
+
+.fb-card__parts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.fb-part {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* The Team Lead's words, set like the quote on the Case Library. */
+.fb-part p:last-child {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  line-height: 26.5px;
+}
+
+.fb-card__focus {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 16px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-sm);
+}
+
+.fb-card__saved {
+  min-width: 40px;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+.fb-card__saved:empty {
+  display: none;
+}
+
+.fb-dims {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.fb-dims__row {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: var(--space-4);
+  font-size: var(--text-sm);
+  line-height: 19px;
+}
+
+.fb-dims__row dt {
+  color: var(--color-text-2);
+  font-weight: 600;
+}
+
+.fb-dims__row dd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px var(--space-2);
+  margin: 0;
+}
+
+.fb-dims__note {
+  color: var(--color-text-2);
+}
+
+.fb-card__act {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3) var(--space-4);
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.fb-card__next {
+  flex: 1 1 320px;
+}
+
+.fb-card__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 42px;
+}
+
+@media (max-width: 900px) {
+  .fb-card__parts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .fb-dims__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}
+
+@media (max-width: 760px) {
+  .fb-card {
+    padding: 20px 18px 22px;
+  }
+}

@@ -1,0 +1,217 @@
+/* Measured from design/casebook/02–09 at 1440×1080. */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-width);
+  padding: 0 var(--space-4);
+  overflow-y: auto;
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.sidebar__logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  align-self: flex-start;
+  height: 44px;
+  margin: 17px 0 0 9px;
+  color: var(--color-on-dark);
+  font-family: var(--font-serif);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.sidebar__logo:hover {
+  color: var(--color-on-dark);
+}
+
+.sidebar__logo-icon {
+  font-size: 20px;
+}
+
+.sidebar__roles {
+  margin-top: 22px;
+}
+
+/* 'Case Expert' and 'Team Lead' are longer than the design's 'Senior' and 'Manager'. At 12px the
+   three labels need 192px of the track's 178px, so they are 1px smaller, and each item takes its
+   label's width plus an equal share of the rest: every label stays on one line with room around it. */
+.sidebar__roles .segmented__item {
+  flex: 1 1 auto;
+  padding: 0 3px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* 38px rows 2.5px apart: the design's 40.5px pitch. */
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5px;
+  margin-top: 32px;
+}
+
+/* One line always. 'Practice Reviews' needs 109px beside a count, so the count takes 4px of the
+   label's 10px gap: the count stays at the right edge and the label gets 112px. */
+.sidebar__nav-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar__nav .count {
+  margin-left: -4px;
+}
+
+/* The design: avatar 18px under the divider, name and title beside it. 'Reset demo data'
+   (not in the design) sits under them, so the bottom padding is smaller than the design's 27px. */
+.sidebar__user {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding: 17px var(--space-2) var(--space-5);
+  border-top: 1px solid var(--color-dark-border);
+}
+
+/* The technical note in one line, under 'Reset demo data'. */
+.sidebar__demo-note {
+  margin: -6px 0 0;
+  color: var(--color-on-dark-3);
+  font-size: 11px;
+  line-height: 15px;
+}
+
+.sidebar__me {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.sidebar__who {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5px;
+  min-width: 0;
+  margin-top: 0.5px;
+}
+
+.sidebar__name {
+  color: var(--color-on-dark);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.sidebar__title {
+  color: var(--color-on-dark-2);
+  font-size: var(--text-xs);
+  line-height: 16px;
+}
+
+/* The logo's row and everything under it. On a desktop the bar is only the logo (the menu
+   button is hidden) and the panel fills the rest, so the geometry above is unchanged. */
+.sidebar__bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.sidebar__menu {
+  display: none;
+}
+
+.sidebar__panel {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+/* Only phones have a menu to open, so only phones show the backdrop. */
+.sidebar__scrim {
+  display: none;
+}
+
+/* Phones: the sidebar becomes a 56px top bar; Menu opens the roles, navigation and user below it. */
+@media (max-width: 767.98px) {
+  .sidebar {
+    right: 0;
+    bottom: auto;
+    width: auto;
+    max-height: 100dvh;
+  }
+
+  .sidebar__bar {
+    align-items: center;
+    height: 56px;
+  }
+
+  .sidebar__logo {
+    height: 56px;
+    margin: 0;
+  }
+
+  .sidebar__menu {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--size-control);
+    padding: 0 14px;
+    border: 1px solid var(--color-dark-outline);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--color-on-dark);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .sidebar__menu .icon {
+    font-size: 16px;
+  }
+
+  .sidebar__menu:focus-visible {
+    outline-color: var(--color-focus-on-dark);
+  }
+
+  .sidebar__panel {
+    display: none;
+  }
+
+  .sidebar[data-open] .sidebar__panel {
+    display: flex;
+  }
+
+  /* Under the sidebar, over the page. */
+  .sidebar__scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 9;
+    display: block;
+    background: var(--color-scrim);
+  }
+
+  .sidebar__roles {
+    margin-top: var(--space-2);
+  }
+
+  .sidebar__nav {
+    margin-top: var(--space-4);
+  }
+
+  .sidebar__user {
+    margin-top: var(--space-4);
+    padding-bottom: var(--space-4);
+  }
+}

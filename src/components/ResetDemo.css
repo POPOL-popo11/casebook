@@ -1,0 +1,58 @@
+/* 'Reset demo data' under the user in the sidebar: a quiet text button on the dark surface. */
+.reset-demo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  align-self: flex-start;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-on-dark-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  line-height: 16px;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+/* A 44px hit area without changing the look. */
+.reset-demo::before {
+  content: "";
+  position: absolute;
+  inset: -6px -4px;
+}
+
+.reset-demo:hover {
+  color: var(--color-on-dark);
+}
+
+.reset-demo .icon {
+  font-size: var(--text-md);
+}
+
+.reset-demo:focus-visible,
+.reset-demo__actions .btn:focus-visible {
+  outline-color: var(--color-focus-on-dark);
+}
+
+.reset-demo__ask {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.reset-demo__question {
+  margin: 0;
+  color: var(--color-on-dark);
+  font-size: var(--text-xs);
+  line-height: 16px;
+}
+
+.reset-demo__actions {
+  display: flex;
+  gap: var(--space-2);
+}

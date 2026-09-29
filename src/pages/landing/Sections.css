@@ -1,0 +1,207 @@
+/* 01 · "One case, three roles.": three 424px cards, 20px apart. */
+.lp-roles {
+  margin-top: 104px;
+}
+
+.lp-roles__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.lp-roles__title {
+  margin: 0;
+  font-size: var(--title-h2);
+  line-height: 52.8px;
+}
+
+.lp-roles__lead {
+  margin: 0 0 2px;
+  color: var(--color-text-3);
+  font-size: var(--text-lg);
+}
+
+.lp-roles__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 38px;
+}
+
+.lp-role {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 298px;
+  padding: 35px 34px 32px;
+  border-radius: var(--radius-card-xl);
+}
+
+.lp-role--dark {
+  box-shadow: var(--shadow-raised);
+}
+
+.lp-role__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.lp-role__eyebrow {
+  margin: 0;
+  color: var(--color-text-3);
+}
+
+.lp-role__icon {
+  color: var(--color-text);
+  font-size: var(--title-sm);
+}
+
+.lp-role__title {
+  margin: 13px 0 0;
+  font-size: var(--title-role);
+  line-height: 40px;
+}
+
+.lp-role__body {
+  margin: 14px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-base);
+  line-height: 23.2px;
+}
+
+.lp-role__link {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.lp-role--dark .lp-role__eyebrow {
+  color: var(--color-on-dark-3);
+}
+
+.lp-role--dark .lp-role__body {
+  color: var(--color-on-dark-body);
+}
+
+.lp-role--dark .lp-role__title,
+.lp-role--dark .lp-role__icon,
+.lp-role--dark .lp-role__link,
+.lp-role--dark .lp-role__link:hover {
+  color: var(--color-on-dark);
+}
+
+/* 01 · "The four moves of good judgement": four 310px columns, each under a 2px rule. */
+.lp-moves {
+  margin-top: 107px;
+}
+
+.lp-moves__label {
+  margin: 0;
+  color: var(--color-text-3);
+}
+
+.lp-moves__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin: 31px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lp-move {
+  padding-top: 25px;
+  border-top: 2px solid var(--color-text);
+}
+
+.lp-move[data-accent] {
+  border-top-color: var(--color-accent);
+}
+
+.lp-move__number {
+  display: block;
+  color: var(--color-text-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 16px;
+}
+
+.lp-move[data-accent] .lp-move__number {
+  color: var(--color-accent);
+}
+
+.lp-move__title {
+  margin: 12px 0 0;
+  font-size: var(--title-move);
+  line-height: 56px;
+}
+
+.lp-move__question {
+  margin: 12px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-base);
+  line-height: 22px;
+}
+
+/* 01 · the dark call-to-action band. */
+.lp-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-7);
+  box-sizing: border-box;
+  min-height: 234px;
+  margin-top: 109px;
+  padding: 66px 72px 62px;
+  border-radius: var(--radius-xl);
+  background: var(--color-dark);
+}
+
+.lp-cta__title {
+  margin: 0;
+  color: var(--color-on-dark);
+  font-size: 50px;
+  line-height: 53px;
+}
+
+.lp-cta__title em {
+  font-style: italic;
+}
+
+/* 'Browse cases' is the shared .btn--outline-dark: it fills with --color-on-dark on hover. */
+.lp-cta__actions {
+  display: flex;
+  flex: none;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+
+/* Overnight: the three ways to practise reuse the roles' cards; the sharing note sits under them. */
+.lp-ways {
+  margin-top: 96px;
+}
+
+.lp-ways__note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  max-width: 760px;
+  margin: 26px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+}
+
+.lp-ways__note strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.lp-ways__note .icon {
+  flex: none;
+  margin-top: 3px;
+  color: var(--color-accent);
+  font-size: 20px;
+}

@@ -1,0 +1,64 @@
+/* Page frame for the Case Expert and Team Lead screens, measured from 02, 03 and 09:
+   content from x=276 to x=1384, the title's cap line at y=48, action buttons 48px from the bottom. */
+.page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 46px 56px 48px;
+}
+
+.page__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-bottom: 30px;
+}
+
+.page__heading {
+  min-width: 0;
+}
+
+.page__title {
+  margin: 0;
+}
+
+.page__subtitle {
+  margin: 4px 0 0;
+}
+
+.page__aside {
+  flex: none;
+}
+
+.page__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+
+.page__actions > :only-child {
+  margin-left: auto;
+}
+
+/* Phones: a 16px gutter, and the header's aside under the title. */
+@media (max-width: 767.98px) {
+  .page {
+    padding: 24px var(--space-4) 32px;
+  }
+
+  .page__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-bottom: 20px;
+  }
+
+  .page__actions {
+    flex-wrap: wrap;
+  }
+}

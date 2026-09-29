@@ -1,0 +1,179 @@
+/* The case details page (new, no design image). It is built like Define (05): the case header,
+   a 360px card on the left and a wider card on the right from 26px below the header, and the
+   action row at the bottom of the canvas. */
+.jr-details__labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 12px 0 0;
+}
+
+.jr-details__grid {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-6);
+  margin-top: 26px;
+}
+
+.jr-details .card {
+  padding: 25px 28px 27px;
+}
+
+.jr-about__title,
+.jr-modes__title,
+.jr-preview__title {
+  margin: 0;
+  line-height: 28px;
+}
+
+/* About this case */
+.jr-about__text {
+  margin: 17px 0 0;
+  color: var(--color-text);
+  font-size: var(--text-base);
+  line-height: 24px;
+}
+
+.jr-about__facts {
+  margin: 21px 0 0;
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.jr-about__fact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  padding: 11px 0;
+  border-top: 1px solid var(--color-hairline);
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.jr-about__fact dt {
+  color: var(--color-text-3);
+}
+
+.jr-about__fact dd {
+  margin: 0;
+  color: var(--color-text);
+}
+
+.jr-about__skills {
+  gap: 8.5px;
+  margin-top: 22px;
+}
+
+.jr-details .chip {
+  box-sizing: border-box;
+  height: 29px;
+  color: var(--color-text-2);
+}
+
+/* How do you want to practise? */
+.jr-modes__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.jr-details .jr-mode {
+  padding: 19px 20px 17px;
+}
+
+.jr-mode__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.jr-mode__label {
+  color: var(--color-text);
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.jr-mode__line {
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  line-height: 18px;
+}
+
+.jr-mode__check {
+  margin-left: var(--space-4);
+}
+
+.jr-mode__check .jr-tick {
+  stroke: var(--color-on-accent);
+}
+
+.jr-modes__note {
+  margin: 18px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 22px;
+}
+
+.jr-details .jr-modes__link {
+  gap: 2px;
+  vertical-align: baseline;
+}
+
+/* Preview */
+.jr-preview__text {
+  margin: 17px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-base);
+  line-height: 24px;
+}
+
+.jr-preview__block {
+  gap: 8.5px;
+  margin-top: 22px;
+}
+
+.jr-preview__materials {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--color-hairline);
+  list-style: none;
+}
+
+.jr-preview__material {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 43.5px;
+  border-top: 1px solid var(--color-hairline);
+  color: var(--color-text);
+  font-size: var(--text-md);
+}
+
+.jr-preview__file {
+  flex: none;
+  color: var(--color-text-3);
+  font-size: var(--text-lg);
+}
+
+/* The action row: 'Case library' on the left, the way in on the right. */
+.jr-details__start {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.jr-details__note {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 900px) {
+  .jr-details__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

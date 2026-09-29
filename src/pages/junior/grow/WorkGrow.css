@@ -1,0 +1,184 @@
+/* Work & Grow (no design image): the case steps' frame and cards (05–08), with five steps. */
+
+/* Each step body slides in 32px from the side (.enter-next / .enter-back). Clip that, so a
+   phone never scrolls sideways during the slide; on desktop the slide stays inside the padding. */
+.page.wg {
+  overflow-x: clip;
+}
+.wg-steps {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.wg-steps .steps__item {
+  padding-top: 16px;
+  text-align: left;
+}
+
+.wg-steps button.steps__item:hover {
+  color: var(--color-text);
+}
+
+.wg__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-top: 26px;
+}
+
+/* Step headings take focus from script after Next and Back; they are not controls, so no ring. */
+.wg__body h2[tabindex="-1"]:focus {
+  outline: none;
+}
+
+.wg__done-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+
+/* Cards */
+.wg-card {
+  padding: 25px 28px 27px;
+}
+
+.wg-card--waiting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+}
+
+.wg-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+}
+
+.wg-card__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.wg-card__lead {
+  margin: 8px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 22px;
+}
+
+.wg-card__foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-4);
+}
+
+.wg-note {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  line-height: 19px;
+}
+
+/* A: the work fields */
+.wg-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px var(--space-6);
+  margin-top: 22px;
+}
+
+.wg-grid__wide {
+  grid-column: 1 / -1;
+}
+
+.wg-segmented {
+  max-width: 480px;
+}
+
+/* Two cards side by side; --aside makes the second one narrower. */
+.wg-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--space-6);
+}
+
+.wg-pair--aside {
+  grid-template-columns: minmax(0, 1fr) 380px;
+}
+
+.wg-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.wg-stack__item {
+  margin-top: 20px;
+}
+
+/* B: questions */
+.wg-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* E: evidence rows */
+.wg-fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.wg-fieldset legend {
+  margin-bottom: var(--space-2);
+  padding: 0;
+}
+
+.wg-evidence-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--space-3);
+}
+
+.wg-remove {
+  margin-top: 12px;
+  font-size: var(--text-sm);
+}
+
+.wg-add {
+  align-self: flex-start;
+  margin-top: 4px;
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 1100px) {
+  .wg-pair,
+  .wg-pair--aside {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .wg-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .wg-steps__name {
+    display: none;
+  }
+
+  .wg-card {
+    padding: 20px 18px 22px;
+  }
+}

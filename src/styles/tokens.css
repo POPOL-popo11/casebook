@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap");
+
+/*
+  Casebook design tokens: the single source of truth for every colour, font,
+  size, space, radius and motion value. Measured from design/casebook/*.png
+  (1440px wide, 1 image pixel = 1 CSS pixel).
+
+  Fonts (identified by fitting text widths and glyph shapes against the images):
+    serif  Newsreader 500 with automatic optical size (headlines and card titles), italic 500 for "yours"
+    sans   IBM Plex Sans (the design is not Inter: Plex gives whole-pixel sizes at every size)
+    mono   IBM Plex Mono (dotted zero, flat-footed 1)
+*/
+
+:root {
+  color-scheme: light;
+
+  /* ---- Colour: light app ---------------------------------------------- */
+  --color-canvas: #f4f3ee; /* page background */
+  --color-surface: #ffffff; /* cards */
+  --color-field: #fbfaf6; /* inputs and textareas */
+  --color-sunken: #efece5; /* board columns (the segmented track uses --color-chip, which is 1 to 2 levels different) */
+  --color-chip: #f0ece3; /* filled chips, avatars, 'At start' badge, segmented track */
+  --color-border: #e5e1da; /* card borders */
+  --color-border-strong: #b0ada0; /* dashed chips, hovered borders */
+  --color-text: #1b1b21;
+  --color-text-2: #43464c;
+  --color-text-3: #62656a; /* 5.3:1 on --color-canvas */
+  --color-text-4: #6b6e75; /* step labels not reached yet, 4.6:1 on --color-canvas */
+  --color-accent: #1e3fa8;
+  --color-accent-hover: #183593;
+  --color-accent-soft: #ebeffb;
+  --color-on-accent: #ffffff;
+  --color-warn: #d9782b;
+  --color-warn-soft: #fceee1;
+  --color-warn-ink: #934509; /* 5.9:1 on --color-warn-soft */
+  --color-neutral: #9d978b;
+
+  /* ---- Colour: dark surfaces ------------------------------------------- */
+  --color-dark: #17181d;
+  --color-dark-raised: #2a2d36; /* active nav row */
+  --color-dark-track: #23262d; /* role-switcher track */
+  --color-on-dark: #f4f3ee;
+  --color-on-dark-2: #bab8af;
+  --color-focus: #1e3fa8;
+
+  /* ---- Extra colour tokens (beyond the contract) ------------------------ */
+  --color-hairline: #eeebe5; /* dividers inside cards */
+  --color-border-control: #dad6cd; /* secondary buttons, outline chips, small controls */
+  --color-border-input: #e1dcd3; /* inputs, textareas, selects */
+  --color-border-dashed: #bfb5a3; /* dashed cards: the unsorted tray, 'Escalate to a senior' */
+  --color-track: #e1dbd0; /* empty step bars and the meter track */
+  --color-track-soft: #e8e4d9; /* empty skill segments */
+  --color-panel: #ece8df; /* landing hero panel, active dark segment, sidebar count */
+  --color-warn-deep: #663207; /* text inside the warn callout */
+  --color-on-dark-3: #a5a49b; /* mono eyebrows and small labels on dark */
+  --color-on-dark-body: #c6c3bb; /* body copy on dark cards */
+  --color-dark-border: #2e2e36; /* divider inside the sidebar */
+  --color-dark-outline: #4b4e55; /* outline pill on dark */
+  --color-dark-avatar: #3b3f4b; /* sidebar user avatar */
+  --color-scrim: #17181d66; /* --color-dark at 40%: backdrop behind the phone menu */
+  --color-accent-line: #8e9fd3; /* dashed ring of the add chip */
+  --color-focus-on-dark: #9db2f5;
+  --color-dot: #cfc9bb; /* dot grid on the landing panel: 2px dots on a 20px grid, first centre 30px, 9.5px from the panel corner */
+  --color-shadow: 23 24 29; /* rgb triplet for shadows */
+  --color-shadow-accent: 30 63 168;
+
+  /* ---- Shadows ----------------------------------------------------------- */
+  --shadow-card: 0 1px 2px rgb(var(--color-shadow) / 0.045);
+  --shadow-raised: 0 16px 40px rgb(var(--color-shadow) / 0.14);
+  --shadow-item: 0 1px 2px rgb(var(--color-shadow) / 0.13); /* active segmented item */
+  --shadow-primary: 0 2px 6px -3px rgb(var(--color-shadow-accent) / 0.5);
+  --shadow-primary-lg: 0 2px 8px -2px rgb(var(--color-shadow-accent) / 0.36);
+
+  /* ---- Select chevron (a data URI cannot read custom properties; the stroke is --color-text-3) ---- */
+  --icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2362656a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+
+  /* ---- Type: families -------------------------------------------------------- */
+  --font-serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+
+  /* ---- Type: sans sizes (measured: the design uses 12, 13, 14, 15, 16 and 19) -- */
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-base: 15px;
+  --text-lg: 16px; /* the contract said 17px; the design has no 17px text, it has 16px */
+  --text-xl: 19px; /* landing hero paragraph */
+
+  /* ---- Type: serif titles (Newsreader 500) ------------------------------------ */
+  --title-sm: 22px; /* card titles: 'Situation', 'Frame the task', case card titles */
+  --title-md: 26.5px; /* section titles: 'Sort what you know', 'Make your call' */
+  --title-lg: 38px; /* page titles: 'Share a case', 'Review the breakdown' (04 greeting is 40px, 09 is 37px) */
+  --title-xl: 78px; /* landing headline */
+  --title-case: 32px; /* case header title on 05 to 08 */
+  --title-role: 36px; /* landing role cards; 04 dark hero title is 36px too */
+  --title-h2: 48px; /* 'One case, three roles.' */
+  --title-move: 52px; /* landing 'Define', 'Examine' ...; the CTA band is 50px */
+
+  /* ---- Type: mono eyebrows ---------------------------------------------------- */
+  --text-eyebrow: 11px; /* landing, 04 hero, 09 note */
+  --text-eyebrow-sm: 10.5px; /* case header, UNSORTED, UNLOCKED */
+  --tracking-eyebrow: 0.1em;
+  --tracking-eyebrow-sm: 0.12em;
+
+  /* ---- Space, 4px base ---------------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px;
+  --space-10: 64px;
+
+  /* ---- Shape and size ------------------------------------------------------------ */
+  --radius-sm: 10px; /* inputs, buttons */
+  --radius-md: 14px; /* options, unlocked cards, the shield row */
+  --radius-sm-plus: 12px; /* sort cards, callouts */
+  --radius-lg: 16px; /* cards */
+  --radius-xl: 30px; /* landing hero panel and the CTA band */
+  --radius-card-xl: 24px; /* landing role cards; the 04 hero card is 22px, 'Sam's feedback' 18px */
+  --radius-pill: 999px;
+  --sidebar-width: 220px;
+  --size-control: 44px; /* minimum hit area */
+
+  /* ---- Motion ----------------------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 160ms;
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1); /* SpaceX hover and reveal curve */
+  --ease-standard: cubic-bezier(0.25, 0.8, 0.25, 1); /* SpaceX overlay fade */
+  --duration-hover: 0.5s;
+  --duration-reveal: 1s;
+  --duration-step: 0.5s;
+  --duration-fill: 0.8s;
+  --duration-toast: 0.4s;
+  --reveal-distance-title: 48px;
+  --reveal-distance-body: 24px;
+  --reveal-distance-button: 64px;
+  --reveal-stagger: 120ms;
+}

@@ -1,0 +1,158 @@
+/* The case frame for 05–08, measured at 1440×1080: content from x=276 to x=1384,
+   the eyebrow's baseline at y=56, the title's at y=88, the step bars at y=124–128,
+   and the action buttons ending 44px above the bottom edge. */
+.jr-case {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 44px 56px 44px;
+}
+
+.jr-case__header {
+  display: flex;
+  flex-direction: column;
+}
+
+.jr-case__eyebrow {
+  margin: 0;
+  line-height: 16px;
+}
+
+.jr-case__titlerow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.jr-case__title {
+  margin: 0;
+  font-size: var(--title-case);
+  letter-spacing: -0.01em;
+  line-height: 40px;
+}
+
+/* 'Save and exit': a quiet text link, its text centred on the title's line. */
+.jr-case__exit {
+  display: inline-flex;
+  flex: none;
+  align-self: flex-start;
+  align-items: center;
+  min-height: var(--size-control);
+  margin: -5px 4px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+  transition: color var(--duration-hover) var(--ease-expo);
+}
+
+.jr-case__exit:hover {
+  color: var(--color-text);
+}
+
+/* The example banner under the progress: 'Example', a line, and the Demo data tag. */
+.jr-case__banner {
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 11px 16px 11px 20px;
+}
+
+.jr-case__banner-text {
+  margin: 0;
+  color: var(--color-text-2);
+}
+
+.jr-case__banner-text strong {
+  margin-right: 6px;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* 'Submitted · read-only', just left of the exit link, centred on it. */
+.jr-case__label {
+  flex: none;
+  align-self: flex-start;
+  margin: 6px calc(var(--space-3) - var(--space-6)) 0 auto;
+}
+
+.jr-case__steps {
+  margin-top: 24px;
+}
+
+/* The design has the labels' cap line 18px below the top of the bar. */
+.jr-case__steps .steps__item {
+  padding-top: 16px;
+}
+
+/* The step body grows so the action row sits at the bottom of the canvas. */
+.jr-case__body {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.jr-case__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: 28px;
+}
+
+.jr-case__actions > :only-child {
+  margin-left: auto;
+}
+
+/* The design keeps each arrow close to its label, and Back has 20px sides. */
+.jr-case__actions .btn {
+  gap: 2px;
+}
+
+.jr-case__actions .btn--secondary {
+  padding-inline: 20px;
+}
+
+/* A row of chips as a list (Define's constraints and people, Examine's Missing). */
+.jr-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jr-chips__add {
+  display: flex;
+}
+
+/* Narrow screens: 16px gutters, the exit link under the title, step labels that can wrap.
+   The step body slides in 32px from the side, more than the gutter: clip it to the canvas. */
+@media (max-width: 700px) {
+  .jr-case {
+    padding: 28px 16px 24px;
+    overflow-x: clip;
+  }
+
+  .jr-case__titlerow {
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+
+  .jr-case__steps .steps__item {
+    font-size: var(--text-xs);
+    overflow-wrap: anywhere;
+  }
+
+  .jr-case__banner {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .jr-case__actions {
+    flex-wrap: wrap;
+  }
+}

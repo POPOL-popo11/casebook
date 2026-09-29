@@ -1,0 +1,203 @@
+/* Reflect's feedback, right column and revision form, split from JuniorReflect.css to keep
+   each file short. Loaded by JuniorReflect.tsx and ReflectGrowth.tsx. */
+/* Feedback: the app's check, then each Team Lead's feedback */
+.jr-check__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.jr-check__intro {
+  margin: 6px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+.jr-check__list {
+  margin: 16px 0 0;
+  padding: 0;
+  border-bottom: 1px solid var(--color-hairline);
+  list-style: none;
+}
+
+.jr-check__item {
+  padding: 14px 0;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.jr-check__row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.jr-check__label {
+  color: var(--color-text);
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.jr-check__text,
+.jr-check__none {
+  margin: 6px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 21px;
+}
+
+.jr-lead__from {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: var(--color-text-2);
+  font-size: var(--text-sm);
+}
+
+.jr-lead__parts {
+  margin: 14px 0 0;
+}
+
+.jr-lead__part + .jr-lead__part {
+  margin-top: 12px;
+}
+
+.jr-lead__part dt {
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.jr-lead__part dd {
+  margin: 4px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 21px;
+}
+
+.jr-lead__dims {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jr-lead__dim {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  color: var(--color-text-2);
+  font-size: var(--text-sm);
+}
+
+/* The right column */
+.jr-side__eyebrow {
+  margin: 0 0 4px;
+  line-height: 16px;
+}
+
+.jr-side__call {
+  margin: 12px 0 0;
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  line-height: 25px;
+}
+
+.jr-side__text {
+  margin: 10px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 21px;
+}
+
+.jr-side__label {
+  margin: 16px 0 0;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.jr-side__list {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  list-style: disc;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 21px;
+}
+
+.jr-side__list li + li {
+  margin-top: 4px;
+}
+
+.jr-side__note {
+  margin: 12px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-hairline);
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  line-height: 19px;
+}
+
+.jr-side__fact {
+  margin: 14px 0 0;
+}
+
+.jr-side__field {
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.jr-side__chips {
+  margin-top: 12px;
+}
+
+.jr-side .jr-side__link {
+  margin-top: 16px;
+  min-height: 0;
+  gap: 2px;
+}
+
+/* Revise your answer: Decide's answer again, stacked in the wide column */
+.jr-revise__title {
+  margin: 0;
+  line-height: 36px;
+}
+
+.jr-revise__intro {
+  margin: 4px 0 18px;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+.jr-revise .jr-reasoning {
+  margin-top: var(--space-6);
+}
+
+.jr-revise__why {
+  gap: 6px;
+  margin-top: var(--space-6);
+}
+
+.jr-revise__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: 18px;
+}
+
+.jr-revise__hint {
+  margin: 0 auto 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}

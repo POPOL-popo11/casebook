@@ -1,0 +1,37 @@
+/* The loading fallback: the space of the screen it stands in for, with one muted word that
+   appears only after 400ms, so a fast load shows nothing but the page background. */
+.loading {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 46px 56px 48px;
+}
+
+.loading--page {
+  background: var(--color-canvas);
+}
+
+.loading__text {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-text-3);
+  opacity: 0;
+  animation: loading-in var(--duration-reveal) var(--ease-standard) 400ms forwards;
+}
+
+@keyframes loading-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading__text {
+    animation-duration: 1ms;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .loading {
+    padding: var(--space-6) var(--space-4);
+  }
+}

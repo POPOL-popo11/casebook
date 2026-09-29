@@ -1,0 +1,174 @@
+/* The performance-review draft on My Growth. */
+.mg-review {
+  margin-top: var(--space-8);
+  padding: 25px 28px 28px;
+}
+
+.mg-review__lead {
+  max-width: 720px;
+  margin: 8px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 22px;
+}
+
+.mg-review__controls {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: var(--space-4) var(--space-7);
+  margin-top: 22px;
+}
+
+.mg-review__range {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.mg-review__records {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.mg-review__records legend {
+  margin-bottom: var(--space-2);
+  padding: 0;
+}
+
+.mg-review__none {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-md);
+}
+
+.mg-review__list {
+  display: flex;
+  flex-direction: column;
+  max-height: 260px;
+  overflow-y: auto;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.mg-review__record {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-hairline);
+  font-size: var(--text-sm);
+  line-height: 19px;
+  cursor: pointer;
+}
+
+.mg-review__record input {
+  flex: none;
+  margin-top: 2px;
+}
+
+.mg-review__record .dot {
+  margin-top: 6px;
+}
+
+.mg-review__record-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* One line from 768px up; its title holds the full text for a mouse user. On a phone the line
+   wraps and shows in full: there is no other way to read it there, and the list scrolls. */
+.mg-review__situation {
+  overflow: hidden;
+  color: var(--color-text-3);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 767.98px) {
+  .mg-review__situation {
+    overflow: visible;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+}
+
+.mg-review__build {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  grid-column: 1 / -1;
+}
+
+.mg-review__count {
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+/* The draft */
+.mg-draft {
+  margin-top: var(--space-7);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-hairline);
+}
+
+.mg-draft__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.mg-draft__meta {
+  margin: 8px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+.mg-draft__tools {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.mg-draft__section {
+  margin-top: var(--space-6);
+}
+
+.mg-draft__empty {
+  margin: 8px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-md);
+}
+
+.mg-draft__lines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+}
+
+.mg-draft__line .textarea {
+  min-height: 0;
+}
+
+.mg-draft__sources {
+  margin: 6px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-xs);
+  line-height: 17px;
+}
+
+@media (max-width: 900px) {
+  .mg-review__controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .mg-review {
+    padding: 20px 18px 22px;
+  }
+}

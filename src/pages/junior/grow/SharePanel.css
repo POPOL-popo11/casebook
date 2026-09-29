@@ -1,0 +1,87 @@
+/* The share panel on My Growth: select, preview the exact copy, confirm. */
+.mg-share {
+  padding: 22px 24px 24px;
+}
+
+.mg-share__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 14px 0 0;
+  font-size: var(--text-sm);
+}
+
+.mg-share__steps li {
+  color: var(--color-text-4);
+}
+
+.mg-share__steps li[data-state="done"] {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.mg-share__steps li[data-state="current"] {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* The preview's lead and "Shared so far" take focus from script; they are not controls, so no ring. */
+.mg-share [tabindex="-1"]:focus {
+  outline: none;
+}
+
+.mg-share__count {
+  margin: 16px 0 12px;
+  font-size: var(--text-md);
+}
+
+.mg-share__note,
+.mg-share__lead {
+  margin: 12px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  line-height: 19px;
+}
+
+.mg-preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-height: 60vh;
+  margin-top: var(--space-3);
+  overflow-y: auto;
+}
+
+.mg-preview__item {
+  min-width: 0;
+}
+
+.mg-share__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.mg-history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.mg-history__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.mg-history__list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px var(--space-2);
+}

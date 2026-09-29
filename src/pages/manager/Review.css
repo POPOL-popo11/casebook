@@ -1,0 +1,172 @@
+/* Cards on the Team Lead's review pages: the 09 cards' padding and 21px serif titles, and rows
+   that open to the raw answer, each divided by a hairline like the design's table rows. */
+.rv-card {
+  padding: 22px 24px 24px;
+}
+
+.rv-card__title {
+  margin: 0;
+  font-size: 21px;
+}
+
+/* A card title with a Demo response tag beside it. */
+.rv-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+
+.rv-card__lead {
+  margin: 4px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.rv-card__label {
+  margin: 18px 0 4px;
+}
+
+/* A label with a Demo response tag beside it: the app's own checks. */
+.rv-card__label--tagged {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.rv-card__label--tagged .field__label {
+  margin: 0;
+}
+
+.rv-card__none {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-md);
+}
+
+.rv-list {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--color-hairline);
+  list-style: none;
+}
+
+.rv-list > li {
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.rv-item__summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--size-control);
+  padding: 10px 28px 10px 0;
+  font-size: var(--text-md);
+  line-height: 20px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.rv-item__summary::-webkit-details-marker {
+  display: none;
+}
+
+.rv-item__summary::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  background: var(--icon-chevron) no-repeat center / 16px 16px;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.rv-item[open] > .rv-item__summary::after {
+  transform: rotate(180deg);
+}
+
+.rv-item__summary:hover .rv-item__text,
+.rv-item__summary:hover .rv-item__preview {
+  color: var(--color-accent);
+}
+
+.rv-item__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.rv-item__label {
+  flex: 0 0 168px;
+  color: var(--color-text-2);
+}
+
+.rv-item__preview {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rv-item[open] .rv-item__preview {
+  visibility: hidden;
+}
+
+.rv-item__full {
+  margin: 0 0 14px;
+  font-size: var(--text-md);
+  line-height: 22px;
+  white-space: pre-wrap;
+}
+
+.rv-item__body {
+  padding-bottom: 14px;
+}
+
+.rv-item__look {
+  margin: 0 0 10px;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  line-height: 18px;
+}
+
+.rv-answers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.rv-answers__row {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: var(--space-3);
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.rv-answers__row dt {
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+.rv-answers__row dd {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 640px) {
+  .rv-answers__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .rv-item__label {
+    flex-basis: 40%;
+  }
+}

@@ -1,0 +1,232 @@
+/* Investigate (07) at 1440×1080: the request list is 744px wide from y=244, then a 24px
+   gap and the 340px UNLOCKED column; 'Time used' is a 260px block ending at x=1384. */
+.jr-investigate__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-top: 26px;
+}
+
+.jr-investigate__title {
+  margin: 0;
+  line-height: 36px;
+}
+
+.jr-time {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 6px;
+  width: 260px;
+  margin-bottom: 5px;
+}
+
+.jr-time__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0;
+  line-height: 20px;
+}
+
+.jr-time__label {
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+.jr-time__value {
+  color: var(--color-text);
+  font-size: var(--text-md);
+  font-weight: 700;
+}
+
+.jr-time__meter {
+  height: 6px;
+}
+
+.jr-investigate__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  align-items: start;
+  gap: var(--space-6);
+  margin-top: 23px;
+}
+
+/* The request list: rows run edge to edge inside the card. */
+.jr-investigate .jr-requests {
+  overflow: hidden;
+  padding: 0;
+}
+
+.jr-requests__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jr-request {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 70px;
+  padding: 16px 24px 16.5px;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.jr-request:first-child {
+  border-top: 0;
+}
+
+.jr-request__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.jr-request__title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: 22px;
+}
+
+.jr-request__why {
+  margin: 2px 0 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  line-height: 20px;
+}
+
+.jr-request__hours {
+  flex: none;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+.jr-investigate .jr-request__badge {
+  flex: none;
+  gap: 4px;
+  min-height: 27px;
+  padding: 0 12px 0 10px;
+}
+
+.jr-request__check {
+  font-size: var(--text-xs);
+}
+
+.jr-investigate .jr-request__btn {
+  flex: none;
+  height: 33px;
+  min-height: 0;
+  padding: 0 14px;
+  border-color: color-mix(in srgb, var(--color-accent) 25%, var(--color-surface));
+  color: var(--color-accent);
+  font-size: var(--text-sm);
+}
+
+.jr-requests__footer {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 51.5px;
+  padding: 0 24px;
+  border-top: 1px solid var(--color-hairline);
+  background: var(--color-field);
+}
+
+.jr-requests__enough {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-md);
+}
+
+.jr-investigate .jr-requests__decide {
+  min-height: 0;
+  height: auto;
+  font-size: var(--text-md);
+}
+
+/* Link arrows sit close to their label, as on the Back and Next buttons. */
+.jr-investigate .btn--link {
+  gap: 2px;
+}
+
+/* UNLOCKED */
+.jr-unlocked {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.jr-unlocked__title {
+  margin: 0;
+  padding-left: 4px;
+  line-height: 16px;
+}
+
+/* Before the first request: one quiet line under the label. */
+.jr-unlocked__empty {
+  margin: 10px 0 0;
+  padding-left: 4px;
+  color: var(--color-text-3);
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.jr-unlocked__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jr-investigate .jr-finding {
+  position: relative;
+  padding: 20px 22px 20px;
+}
+
+.jr-finding__label {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  line-height: 20px;
+}
+
+.jr-finding__dot {
+  position: absolute;
+  top: 25px;
+  right: 22px;
+}
+
+.jr-finding__text {
+  margin: 5px 0 0;
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.jr-investigate .jr-unlocked__warn {
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 51px;
+  margin-top: 12px;
+  padding: 0 20px;
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+.jr-unlocked__warn p {
+  margin: 0;
+}
+
+/* 'Revisit →' keeps the callout's colour on hover too. */
+.jr-unlocked__warn .jr-unlocked__revisit:hover {
+  color: inherit;
+}

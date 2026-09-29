@@ -1,0 +1,74 @@
+/* Investigate in practice mode: what the learner wants to confirm before a request, the link
+   from a finding to its material, and narrow screens. Split from JuniorInvestigate.css. */
+/* What the learner wanted to confirm, under a request they made. */
+.jr-request__intent {
+  margin: 4px 0 0;
+  color: var(--color-text-2);
+  font-size: var(--text-sm);
+  line-height: 20px;
+}
+
+/* While the field is open, the hours stay on the title's line. */
+.jr-request[data-asking] {
+  align-items: flex-start;
+}
+
+.jr-request[data-asking] .jr-request__hours {
+  line-height: 22px;
+}
+
+/* 'What I want to confirm', opened by Request: a field, then Request and Cancel. */
+.jr-ask {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.jr-ask__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* One line at 36px beside the small buttons; a longer intent wraps and grows the box. */
+.jr-investigate .textarea.jr-ask__input {
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 0;
+  min-height: 36px;
+  padding-block: 6px;
+}
+
+.jr-investigate .jr-ask__cancel {
+  min-height: 0;
+  font-size: var(--text-sm);
+}
+
+/* 'Read <material> →' under a finding that unlocks a material. */
+.jr-investigate .jr-finding__open {
+  margin-top: 12px;
+  min-height: 0;
+  font-size: var(--text-md);
+  text-align: left;
+  white-space: normal;
+}
+
+@media (max-width: 900px) {
+  .jr-investigate__head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .jr-time {
+    width: auto;
+  }
+
+  .jr-investigate__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .jr-request {
+    flex-wrap: wrap;
+  }
+}

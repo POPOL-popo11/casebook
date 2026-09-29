@@ -1,0 +1,223 @@
+/* Decide (08) at 1440×1080: two 542px columns with a 24px gap from y=237. Options are
+   78px tall with 10px between them; the reasoning card has 28px of padding. */
+.jr-decide__title {
+  margin: 22px 0 0;
+  line-height: 36px;
+}
+
+.jr-decide__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--space-6);
+  margin-top: 22px;
+}
+
+/* Options */
+.jr-options__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* The label and trade-off fill the option's 40px content box, 1px below centre. */
+.jr-decide .jr-option {
+  padding: 19px 20px 17px;
+}
+
+.jr-option__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.jr-option__label {
+  color: var(--color-text);
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.jr-option__tradeoff {
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  line-height: 16px;
+}
+
+.jr-option__check .jr-tick {
+  stroke: var(--color-on-accent);
+}
+
+/* 'Escalate to a senior': dashed and unfilled, an up arrow in a wider letter slot. */
+/* The design draws the escalate option 2px shorter than the others. */
+.jr-decide .jr-option--escalate {
+  padding-block: 17px 16px;
+}
+
+.jr-decide .jr-option--escalate:not([aria-pressed='true']) {
+  border-style: dashed;
+  border-color: var(--color-border-dashed);
+  background: none;
+  box-shadow: none;
+}
+
+.jr-decide .jr-option--escalate .option__letter {
+  width: 30px;
+  color: var(--color-text-3);
+  font-size: var(--text-xs);
+}
+
+.jr-based {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 19px;
+}
+
+.jr-based__label {
+  flex: none;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+.jr-decide .chip {
+  box-sizing: border-box;
+  height: 32px;
+}
+
+/* Reasoning */
+.jr-decide .jr-reasoning {
+  padding: 29px 28px 28px;
+}
+
+.jr-reasoning__field {
+  gap: 6px;
+}
+
+.jr-reasoning__field + .jr-reasoning__field {
+  margin-top: 21px;
+}
+
+.jr-decide .field__label {
+  line-height: 18px;
+}
+
+.jr-decide .input {
+  box-sizing: border-box;
+  height: 42px;
+}
+
+/* No resize grip: the design shows none. Longer reasons grow the box instead of hiding. */
+.jr-decide .jr-reasoning__why {
+  box-sizing: border-box;
+  height: auto;
+  min-height: 67px;
+  field-sizing: content;
+  resize: none;
+}
+
+.jr-reasoning__confidence {
+  box-sizing: border-box;
+  height: 42px;
+}
+
+/* Action row: the note sits just left of Submit. */
+.jr-decide__submit {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.jr-decide__next {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+/* Read-only options (the example, or a submitted answer) keep their look but don't react. */
+.jr-decide .option[aria-disabled='true'] {
+  cursor: default;
+}
+
+.jr-decide .option[aria-disabled='true']:not([aria-pressed='true']):hover {
+  border-color: var(--color-border);
+}
+
+.jr-decide .jr-option--escalate[aria-disabled='true']:not([aria-pressed='true']):hover {
+  border-color: var(--color-border-dashed);
+}
+
+/* 'Your plan', under the options when the learner writes their own. */
+.jr-own {
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.jr-decide .jr-own__plan {
+  box-sizing: border-box;
+  resize: none;
+}
+
+/* In practice 'Based on' is a set of chips to pick, which may run to several rows. */
+.jr-based:has(.jr-based__choices) {
+  align-items: flex-start;
+}
+
+.jr-based:has(.jr-based__choices) .jr-based__label {
+  padding-top: 7px;
+}
+
+/* Owner and Review by share a row in the reasoning card. */
+.jr-reasoning__pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.jr-reasoning__pair .field {
+  gap: 6px;
+}
+
+/* The case's submission: a full-width card under the two columns, fields two to a row. */
+.jr-decide .jr-submission {
+  margin-top: var(--space-6);
+  padding: 25px 28px 28px;
+}
+
+.jr-submission__title {
+  margin: 0;
+  line-height: 28px;
+}
+
+.jr-submission__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 21px var(--space-6);
+  margin-top: 20px;
+}
+
+.jr-submission__grid .field {
+  gap: 6px;
+}
+
+.jr-decide .jr-submission__input {
+  box-sizing: border-box;
+  min-height: 67px;
+  field-sizing: content;
+  resize: none;
+}
+
+@media (max-width: 900px) {
+  .jr-decide__grid,
+  .jr-submission__grid,
+  .jr-reasoning__pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .jr-based,
+  .jr-decide__submit {
+    flex-wrap: wrap;
+  }
+}

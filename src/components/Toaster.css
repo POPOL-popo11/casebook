@@ -1,0 +1,50 @@
+.toaster {
+  position: fixed;
+  right: 0;
+  bottom: var(--space-7);
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.toaster__toast {
+  max-width: calc(100vw - 2 * var(--space-4));
+  margin: 0;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  background: var(--color-dark);
+  box-shadow: var(--shadow-raised);
+  color: var(--color-on-dark);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: 500;
+  line-height: 1.4;
+  animation: toaster-in var(--duration-toast) var(--ease-expo) both;
+}
+
+/* Fades out over the last 300ms of its 3 seconds (see Toaster.tsx). */
+.toaster__toast[data-leaving='true'] {
+  animation: toaster-out 300ms var(--ease-standard) forwards;
+}
+
+@keyframes toaster-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-4));
+  }
+}
+
+@keyframes toaster-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toaster__toast,
+  .toaster__toast[data-leaving='true'] {
+    animation: none;
+  }
+}

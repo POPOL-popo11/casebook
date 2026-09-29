@@ -1,0 +1,134 @@
+/* The landing page below the design's 1440px. Imported last, so these win over the desktop rules.
+   Tablets: one column for the hero. Phones: a 16px gutter, stacked cards, smaller headings, and
+   no collage (its cards are placed for a 580px panel). */
+@media (max-width: 1100px) {
+  .lp {
+    padding: 0 32px;
+  }
+
+  .lp-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lp-hero__title {
+    font-size: min(var(--title-xl), 9vw);
+  }
+
+  .lp-collage {
+    width: 100%;
+    max-width: 580px;
+  }
+
+  .lp-roles__cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lp-role {
+    min-height: 0;
+  }
+
+  .lp-moves__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lp-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 48px 40px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .lp {
+    padding: 0 var(--space-4);
+  }
+
+  .lp-nav {
+    margin-top: 12px;
+  }
+
+  .lp-nav__links {
+    display: none;
+  }
+
+  .lp-nav__actions {
+    gap: var(--space-3);
+  }
+
+  .lp-hero {
+    margin-top: 32px;
+  }
+
+  .lp-hero__title {
+    font-size: 11vw;
+  }
+
+  .lp-hero__sub {
+    font-size: var(--text-lg);
+    line-height: 1.5;
+  }
+
+  .lp-hero__sub br {
+    display: none;
+  }
+
+  .lp-collage {
+    display: none;
+  }
+
+  .lp-roles,
+  .lp-ways,
+  .lp-moves {
+    margin-top: 64px;
+  }
+
+  .lp-roles__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .lp-roles__title {
+    font-size: 34px;
+    line-height: 1.15;
+  }
+
+  .lp-role {
+    padding: 26px 24px 24px;
+  }
+
+  .lp-moves__list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .lp-move__title {
+    font-size: 38px;
+    line-height: 1.2;
+  }
+
+  .lp-cta {
+    margin-top: 64px;
+    padding: 36px 24px;
+  }
+
+  .lp-cta__title {
+    font-size: 32px;
+    line-height: 1.15;
+  }
+
+  .lp-cta__title br {
+    display: none;
+  }
+
+  .lp-cta__actions {
+    flex-wrap: wrap;
+  }
+
+  .lp-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-top: 48px;
+  }
+}
