@@ -14,7 +14,7 @@ export function FeedbackEntry({ item, refs }: FeedbackEntryProps) {
   return (
     <article className="card mg-record" aria-labelledby={titleId}>
       <header className="mg-record__head">
-        <span className="badge badge--neutral gr-kind">
+        <span className="badge badge--lead gr-kind">
           <span className={`dot ${KIND_DOTS.manager}`} aria-hidden="true" />
           {KIND_LABELS.manager}
         </span>

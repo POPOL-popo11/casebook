@@ -24,7 +24,7 @@
   color: var(--color-on-dark);
   font-family: var(--font-serif);
   font-size: 23px;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1;
   text-decoration: none;
 }
@@ -59,18 +59,20 @@
   margin-top: 32px;
 }
 
-/* One line always. 'Practice Reviews' needs 109px beside a count, so the count takes 4px of the
-   label's 10px gap: the count stays at the right edge and the label gets 112px. */
+/* One line always. In Plus Jakarta Sans 'Practice Reviews' needs about 112px (114px when active)
+   beside a count, so the label is set 0.01em tighter and the count takes 6px of the label's 10px
+   gap: the count stays at the right edge and the label gets 114px. */
 .sidebar__nav-label {
   flex: 1;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  letter-spacing: -0.01em;
 }
 
 .sidebar__nav .count {
-  margin-left: -4px;
+  margin-left: -6px;
 }
 
 /* The design: avatar 18px under the divider, name and title beside it. 'Reset demo data'
@@ -168,7 +170,7 @@
     min-height: var(--size-control);
     padding: 0 14px;
     border: 1px solid var(--color-dark-outline);
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-sm);
     background: transparent;
     color: var(--color-on-dark);
     font-family: var(--font-sans);

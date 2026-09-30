@@ -14,7 +14,7 @@
   margin-right: -4px;
   padding: 0;
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-xs);
   background: none;
   color: var(--color-text-3);
   font: inherit;
@@ -40,6 +40,6 @@
   width: 180px;
   height: 30px;
   padding: 0 12px;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-xs);
   font-size: var(--text-sm);
 }

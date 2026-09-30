@@ -13,8 +13,8 @@
   margin: 9px 0 0;
   color: var(--color-on-dark);
   font-family: var(--font-serif);
-  font-size: var(--text-xl);
-  line-height: 27.5px;
+  font-size: var(--text-lg);
+  line-height: 24px;
   white-space: pre-wrap;
 }
 

@@ -15,7 +15,7 @@ export const GROWTH_KIND_LABELS: Record<GrowthKind, string> = {
 export const GROWTH_KIND_DOTS: Record<GrowthKind, string> = {
   practice: 'dot--neutral',
   workplace: 'dot--accent',
-  manager: 'dot--warn',
+  manager: 'dot--lead', // v3: teal for Team Lead feedback
 }
 
 export const OUTCOME_LABELS: Record<GrowthRecord['outcome'], string> = {

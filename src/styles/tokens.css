@@ -1,82 +1,89 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap");
 
 /*
   Casebook design tokens: the single source of truth for every colour, font,
   size, space, radius and motion value. Measured from design/casebook/*.png
   (1440px wide, 1 image pixel = 1 CSS pixel).
 
-  Fonts (identified by fitting text widths and glyph shapes against the images):
-    serif  Newsreader 500 with automatic optical size (headlines and card titles), italic 500 for "yours"
-    sans   IBM Plex Sans (the design is not Inter: Plex gives whole-pixel sizes at every size)
-    mono   IBM Plex Mono (dotted zero, flat-footed 1)
+  v3 restyle (style guide, cool palette): ink #16161D, violet #5B3FE4, violet tint #F1EEFD,
+  AI coral #B8431E, lead teal #0F6B55, sidebar #15151B, surfaces white on cool grey #F7F7F9.
+  Fonts:
+    serif  Plus Jakarta Sans 700 to 800 (the token name is kept; titles use it)
+    sans   Plus Jakarta Sans 400 to 700
+    mono   IBM Plex Mono (kept for page-level labels; eyebrows are now sans 700 caps)
 */
 
 :root {
   color-scheme: light;
 
   /* ---- Colour: light app ---------------------------------------------- */
-  --color-canvas: #f4f3ee; /* page background */
+  --color-canvas: #f7f7f9; /* page background */
   --color-surface: #ffffff; /* cards */
-  --color-field: #fbfaf6; /* inputs and textareas */
-  --color-sunken: #efece5; /* board columns (the segmented track uses --color-chip, which is 1 to 2 levels different) */
-  --color-chip: #f0ece3; /* filled chips, avatars, 'At start' badge, segmented track */
-  --color-border: #e5e1da; /* card borders */
-  --color-border-strong: #b0ada0; /* dashed chips, hovered borders */
-  --color-text: #1b1b21;
-  --color-text-2: #43464c;
-  --color-text-3: #62656a; /* 5.3:1 on --color-canvas */
-  --color-text-4: #6b6e75; /* step labels not reached yet, 4.6:1 on --color-canvas */
-  --color-accent: #1e3fa8;
-  --color-accent-hover: #183593;
-  --color-accent-soft: #ebeffb;
+  --color-field: #ffffff; /* inputs and textareas: white with a cool border, as in the v3 reference */
+  --color-sunken: #f1f1f4; /* board columns (the segmented track uses --color-chip, which is 1 to 2 levels different) */
+  --color-chip: #efeff3; /* filled chips, avatars, 'At start' badge, segmented track */
+  --color-border: #e6e6eb; /* card borders */
+  --color-border-strong: #adadb8; /* dashed chips, hovered borders */
+  --color-text: #16161d;
+  --color-text-2: #44444f;
+  --color-text-3: #62626e; /* 5.6:1 on --color-canvas */
+  --color-text-4: #6b6b77; /* step labels not reached yet, 4.9:1 on --color-canvas, 4.6:1 on --color-chip */
+  --color-accent: #5b3fe4; /* violet; 6.4:1 with white, 5.6:1 on --color-accent-soft */
+  --color-accent-hover: #4a2fd0;
+  --color-accent-soft: #f1eefd;
   --color-on-accent: #ffffff;
-  --color-warn: #d9782b;
-  --color-warn-soft: #fceee1;
-  --color-warn-ink: #934509; /* 5.9:1 on --color-warn-soft */
-  --color-neutral: #9d978b;
+  --color-warn: #b8431e; /* AI coral; 5.4:1 on white */
+  --color-warn-soft: #fbeee9;
+  --color-warn-ink: #9a3515; /* 6.4:1 on --color-warn-soft */
+  --color-neutral: #9a9aa6;
+  --color-lead: #0f6b55; /* Lead teal: Team Lead feedback, Published, Agrees, Saved; 6.4:1 on white */
+  --color-lead-soft: #e6f5f2; /* pale teal fill */
+  --color-lead-ink: #0c5c49; /* 7.1:1 on --color-lead-soft */
 
   /* ---- Colour: dark surfaces ------------------------------------------- */
-  --color-dark: #17181d;
-  --color-dark-raised: #2a2d36; /* active nav row */
-  --color-dark-track: #23262d; /* role-switcher track */
-  --color-on-dark: #f4f3ee;
-  --color-on-dark-2: #bab8af;
-  --color-focus: #1e3fa8;
+  --color-dark: #15151b;
+  --color-dark-raised: #2a2a33; /* active nav row */
+  --color-dark-track: #222229; /* role-switcher track */
+  --color-on-dark: #f7f7f9;
+  --color-on-dark-2: #b9b9c3;
+  --color-focus: #5b3fe4;
 
   /* ---- Extra colour tokens (beyond the contract) ------------------------ */
-  --color-hairline: #eeebe5; /* dividers inside cards */
-  --color-border-control: #dad6cd; /* secondary buttons, outline chips, small controls */
-  --color-border-input: #e1dcd3; /* inputs, textareas, selects */
-  --color-border-dashed: #bfb5a3; /* dashed cards: the unsorted tray, 'Escalate to a senior' */
-  --color-track: #e1dbd0; /* empty step bars and the meter track */
-  --color-track-soft: #e8e4d9; /* empty skill segments */
-  --color-panel: #ece8df; /* landing hero panel, active dark segment, sidebar count */
-  --color-warn-deep: #663207; /* text inside the warn callout */
-  --color-on-dark-3: #a5a49b; /* mono eyebrows and small labels on dark */
-  --color-on-dark-body: #c6c3bb; /* body copy on dark cards */
-  --color-dark-border: #2e2e36; /* divider inside the sidebar */
-  --color-dark-outline: #4b4e55; /* outline pill on dark */
-  --color-dark-avatar: #3b3f4b; /* sidebar user avatar */
-  --color-scrim: #17181d66; /* --color-dark at 40%: backdrop behind the phone menu */
-  --color-accent-line: #8e9fd3; /* dashed ring of the add chip */
-  --color-focus-on-dark: #9db2f5;
-  --color-dot: #cfc9bb; /* dot grid on the landing panel: 2px dots on a 20px grid, first centre 30px, 9.5px from the panel corner */
-  --color-shadow: 23 24 29; /* rgb triplet for shadows */
-  --color-shadow-accent: 30 63 168;
+  --color-hairline: #eeeef2; /* dividers inside cards */
+  --color-border-control: #dadae1; /* secondary buttons, outline chips, small controls */
+  --color-border-input: #e1e1e7; /* inputs, textareas, selects */
+  --color-border-dashed: #b8b8c4; /* dashed cards: the unsorted tray, 'Escalate to a senior' */
+  --color-track: #e2e2e8; /* empty step bars and the meter track */
+  --color-track-soft: #e9e9ee; /* empty skill segments */
+  --color-panel: #f1eefd; /* landing hero panel, active dark segment, sidebar count */
+  --color-warn-deep: #6b2410; /* text inside the warn callout */
+  --color-on-dark-3: #a3a3ae; /* mono eyebrows and small labels on dark */
+  --color-on-dark-body: #c5c5ce; /* body copy on dark cards */
+  --color-dark-border: #2c2c35; /* divider inside the sidebar */
+  --color-dark-outline: #4a4a55; /* outline pill on dark */
+  --color-dark-avatar: #3a3a47; /* sidebar user avatar */
+  --color-scrim: #15151b66; /* --color-dark at 40%: backdrop behind the phone menu */
+  --color-accent-line: #ad9ff2; /* dashed ring of the add chip */
+  --color-focus-on-dark: #a898f7; /* 7.4:1 on --color-dark */
+  --color-focus-ring: #d6cefa; /* violet halo around a focused input (the border itself turns --color-accent) */
+  --color-disabled: #92939e; /* label on a disabled filled button (disabled text is exempt from 4.5:1) */
+  --color-dot: #dcd6f8; /* dot grid on the landing panel: 2px dots on a 20px grid, first centre 30px, 9.5px from the panel corner */
+  --color-shadow: 21 21 27; /* rgb triplet for shadows */
+  --color-shadow-accent: 91 63 228;
 
   /* ---- Shadows ----------------------------------------------------------- */
-  --shadow-card: 0 1px 2px rgb(var(--color-shadow) / 0.045);
+  --shadow-card: 0 1px 2px rgb(var(--color-shadow) / 0.03); /* v3: almost flat, the border carries the edge */
   --shadow-raised: 0 16px 40px rgb(var(--color-shadow) / 0.14);
-  --shadow-item: 0 1px 2px rgb(var(--color-shadow) / 0.13); /* active segmented item */
-  --shadow-primary: 0 2px 6px -3px rgb(var(--color-shadow-accent) / 0.5);
-  --shadow-primary-lg: 0 2px 8px -2px rgb(var(--color-shadow-accent) / 0.36);
+  --shadow-item: 0 1px 2px rgb(var(--color-shadow) / 0.08); /* active segmented item */
+  --shadow-primary: none; /* v3: flat buttons */
+  --shadow-primary-lg: none;
 
   /* ---- Select chevron (a data URI cannot read custom properties; the stroke is --color-text-3) ---- */
-  --icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2362656a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  --icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2362626e' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
 
   /* ---- Type: families -------------------------------------------------------- */
-  --font-serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* titles: same family as body, weight 700 to 800 */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
 
   /* ---- Type: sans sizes (measured: the design uses 12, 13, 14, 15, 16 and 19) -- */
@@ -87,21 +94,21 @@
   --text-lg: 16px; /* the contract said 17px; the design has no 17px text, it has 16px */
   --text-xl: 19px; /* landing hero paragraph */
 
-  /* ---- Type: serif titles (Newsreader 500) ------------------------------------ */
-  --title-sm: 22px; /* card titles: 'Situation', 'Frame the task', case card titles */
-  --title-md: 26.5px; /* section titles: 'Sort what you know', 'Make your call' */
-  --title-lg: 38px; /* page titles: 'Share a case', 'Review the breakdown' (04 greeting is 40px, 09 is 37px) */
-  --title-xl: 78px; /* landing headline */
-  --title-case: 32px; /* case header title on 05 to 08 */
-  --title-role: 36px; /* landing role cards; 04 dark hero title is 36px too */
-  --title-h2: 48px; /* 'One case, three roles.' */
-  --title-move: 52px; /* landing 'Define', 'Examine' ...; the CTA band is 50px */
+  /* ---- Type: titles (Plus Jakarta Sans 700 to 800) --------------------------------- */
+  --title-sm: 20px; /* card titles: 'Situation', 'Frame the task', case card titles */
+  --title-md: 23px; /* section titles: 'Sort what you know', 'Make your call' */
+  --title-lg: 32px; /* page titles: 'Share a case', 'Review the breakdown' (04 greeting is 40px, 09 is 37px) */
+  --title-xl: 62px; /* landing headline */
+  --title-case: 28px; /* case header title on 05 to 08 */
+  --title-role: 30px; /* landing role cards; 04 dark hero title is 36px too */
+  --title-h2: 42px; /* 'One case, three roles.' */
+  --title-move: 44px; /* landing 'Define', 'Examine' ...; the CTA band is 50px */
 
-  /* ---- Type: mono eyebrows ---------------------------------------------------- */
+  /* ---- Type: eyebrows (v3: Plus Jakarta Sans 700 caps; sizes kept so nothing reflows) ---- */
   --text-eyebrow: 11px; /* landing, 04 hero, 09 note */
   --text-eyebrow-sm: 10.5px; /* case header, UNSORTED, UNLOCKED */
-  --tracking-eyebrow: 0.1em;
-  --tracking-eyebrow-sm: 0.12em;
+  --tracking-eyebrow: 0.07em;
+  --tracking-eyebrow-sm: 0.08em;
 
   /* ---- Space, 4px base ---------------------------------------------------------- */
   --space-1: 4px;
@@ -116,12 +123,14 @@
   --space-10: 64px;
 
   /* ---- Shape and size ------------------------------------------------------------ */
-  --radius-sm: 10px; /* inputs, buttons */
-  --radius-md: 14px; /* options, unlocked cards, the shield row */
-  --radius-sm-plus: 12px; /* sort cards, callouts */
-  --radius-lg: 16px; /* cards */
-  --radius-xl: 30px; /* landing hero panel and the CTA band */
-  --radius-card-xl: 24px; /* landing role cards; the 04 hero card is 22px, 'Sam's feedback' 18px */
+  /* v3 reference: small radii. 6 badges and chips, 8 buttons and inputs, 10 rows, 12 cards. */
+  --radius-xs: 6px; /* badges, chips, segmented items */
+  --radius-sm: 8px; /* inputs, buttons */
+  --radius-md: 10px; /* options, unlocked cards, the shield row */
+  --radius-sm-plus: 10px; /* sort cards, callouts */
+  --radius-lg: 12px; /* cards */
+  --radius-xl: 16px; /* landing hero panel and the CTA band */
+  --radius-card-xl: 14px; /* landing role cards */
   --radius-pill: 999px;
   --sidebar-width: 220px;
   --size-control: 44px; /* minimum hit area */

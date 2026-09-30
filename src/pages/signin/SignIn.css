@@ -23,6 +23,7 @@
   color: var(--color-text);
   font-family: var(--font-serif);
   font-size: 26px;
+  font-weight: 700;
   line-height: 1;
   text-decoration: none;
 }
@@ -54,19 +55,14 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  height: 30px;
+  height: 24px;
   margin: 0;
-  padding: 0 14px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  background: var(--color-surface);
-  color: var(--color-text-2);
-  font-size: var(--text-sm);
-}
-
-.si-pill__dot {
-  width: 6px;
-  height: 6px;
+  padding: 0 9px;
+  border-radius: var(--radius-xs);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: var(--text-xs);
+  font-weight: 600;
 }
 
 .si-title {
@@ -132,7 +128,7 @@
 .si-start {
   padding: 4px 10px;
   border: 1px solid var(--color-dark-outline);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-xs);
   color: var(--color-on-dark);
   font-family: var(--font-mono);
   font-size: var(--text-eyebrow);

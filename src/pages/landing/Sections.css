@@ -122,14 +122,11 @@
 
 .lp-move__number {
   display: block;
-  color: var(--color-text-3);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  line-height: 16px;
-}
-
-.lp-move[data-accent] .lp-move__number {
   color: var(--color-accent);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  line-height: 16px;
 }
 
 .lp-move__title {

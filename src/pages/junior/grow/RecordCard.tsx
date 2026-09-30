@@ -37,7 +37,7 @@ export function RecordCard({ record, refs, selected, onToggle }: RecordCardProps
   return (
     <article className="card mg-record" aria-labelledby={titleId} data-selected={selected}>
       <header className="mg-record__head">
-        <span className="badge badge--neutral gr-kind">
+        <span className={`badge ${record.kind === 'manager' ? 'badge--lead' : 'badge--neutral'} gr-kind`}>
           <span className={`dot ${KIND_DOTS[record.kind]}`} aria-hidden="true" />
           {KIND_LABELS[record.kind]}
         </span>

@@ -91,7 +91,6 @@ export function SignIn() {
       </header>
       <main className="si-main">
         <p className="si-pill">
-          <span className="dot dot--accent si-pill__dot" aria-hidden="true" />
           Prototype · demo accounts
         </p>
         <h1 className="title si-title reveal reveal--title" data-revealed="true">

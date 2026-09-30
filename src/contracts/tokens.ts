@@ -24,6 +24,9 @@ export const TOKENS = [
   '--color-warn-soft', // peach fills: Review badge, On request badge, warn callout
   '--color-warn-ink', // dark orange text on --color-warn-soft
   '--color-neutral', // grey dot for Assumption
+  '--color-lead', // v3: teal for Team Lead feedback, Published, Agrees, Saved
+  '--color-lead-soft', // v3: pale teal fills behind --color-lead-ink
+  '--color-lead-ink', // v3: dark teal text on --color-lead-soft
   // Colour: dark surfaces (sidebar, dark cards, dark CTA band)
   '--color-dark',
   '--color-dark-raised', // active nav row
@@ -152,6 +155,7 @@ export const PRIMITIVE_CLASSES = [
   'badge--accent', // 'Confirmed', 'Aligned', 'Requested'
   'badge--warn', // 'Review', 'Differs', 'On request'
   'badge--neutral', // 'At start'
+  'badge--lead', // v3: teal, Team Lead feedback ('Manager feedback', 'Sent')
   'segmented', // track with items ('Low / Medium / High')
   'segmented__item',
   'segmented--dark', // the sidebar role switcher
@@ -173,6 +177,7 @@ export const PRIMITIVE_CLASSES = [
   'dot--ring', // hollow blue ring ('Needs checking')
   'dot--neutral',
   'dot--warn',
+  'dot--lead', // v3: teal legend dot for Manager feedback
   'callout', // pale blue box with an icon
   'callout--warn', // peach box
   'link', // inline blue text link

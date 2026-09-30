@@ -40,7 +40,7 @@
   width: 100%;
   height: 42px;
   padding: 0 16px 0 38px;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   background: var(--color-surface);
   font-size: var(--text-md);
 }
@@ -55,7 +55,7 @@
   height: 180px;
   margin-top: 37px;
   padding: 40px 44px;
-  border-radius: 22px; /* 04 hero card; --radius-card-xl is 24px */
+  border-radius: var(--radius-xl);
 }
 
 .jr-hero__eyebrow {

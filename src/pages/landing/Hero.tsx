@@ -10,7 +10,6 @@ export function Hero() {
     <section className="lp-hero" aria-labelledby="lp-hero-title">
       <div className="lp-hero__copy">
         <p className="lp-pill">
-          <span className="dot dot--accent lp-pill__dot" aria-hidden="true" />
           Judgement training for the AI era
         </p>
         <h1 id="lp-hero-title" className="title title--xl lp-hero__title reveal reveal--title" data-revealed="true">
