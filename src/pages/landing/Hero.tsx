@@ -13,11 +13,7 @@ export function Hero() {
           Judgement training for the AI era
         </p>
         <h1 id="lp-hero-title" className="title title--xl lp-hero__title reveal reveal--title" data-revealed="true">
-          Practise real calls
-          <br />
-          before they're
-          <br />
-          <em>yours</em> to make.
+          Practise, review real work, and track how your <em>judgement</em> grows.
         </h1>
         <p className="lp-hero__sub reveal reveal--body" data-revealed="true">
           {HERO_SUB}

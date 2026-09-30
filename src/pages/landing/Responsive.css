@@ -52,7 +52,20 @@
   }
 
   .lp-nav__actions {
-    gap: var(--space-3);
+    gap: var(--space-2);
+  }
+
+  /* 'Work Buddy' is two words: at 25px it wrapped onto two lines beside the buttons, and pushed
+     'Sign in' onto two lines too. A smaller wordmark keeps the bar on one line, inside the
+     margins, down to 360px. */
+  .lp-logo {
+    gap: 6px;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+  .lp-nav__signin {
+    white-space: nowrap;
   }
 
   .lp-hero {
