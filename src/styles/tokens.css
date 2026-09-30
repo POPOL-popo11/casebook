@@ -66,7 +66,7 @@
   --color-accent-line: #ad9ff2; /* dashed ring of the add chip */
   --color-focus-on-dark: #a898f7; /* 7.4:1 on --color-dark */
   --color-focus-ring: #d6cefa; /* violet halo around a focused input (the border itself turns --color-accent) */
-  --color-disabled: #92939e; /* label on a disabled filled button (disabled text is exempt from 4.5:1) */
+  --color-disabled: #6b6b77; /* label on a disabled filled button: 4.6:1 on --color-chip, so it still reads (was #92939e, 2.7:1) */
   --color-dot: #dcd6f8; /* dot grid on the landing panel: 2px dots on a 20px grid, first centre 30px, 9.5px from the panel corner */
   --color-shadow: 21 21 27; /* rgb triplet for shadows */
   --color-shadow-accent: 91 63 228;

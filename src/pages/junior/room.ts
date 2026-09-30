@@ -62,6 +62,19 @@ export function enterRoom(content: CaseContent, roleId?: string): void {
   if (script) setStore((draft) => void sessionFor(draft, content, script, roleId))
 }
 
+// 'Start the room again': a fresh session with the same role, so the initial position can be
+// written again. The old session stays in the store (a submitted one stays in the Team Lead's
+// queue); it is just no longer the one the room shows.
+export function restartRoom(content: CaseContent): void {
+  const script = content.room
+  if (!script) return
+  setStore((draft) => {
+    const fresh = blankRoom(content, script, currentRoom(draft, content.id)?.roleId)
+    draft.rooms.push(fresh)
+    draft.ui.activeRoom[content.id] = fresh.id
+  })
+}
+
 export type RoomUpdate = (recipe: (session: RoomSession) => void) => void
 
 export type Room = { session: RoomSession; readOnly: boolean; update: RoomUpdate }

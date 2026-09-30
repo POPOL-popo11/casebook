@@ -4,7 +4,7 @@ import { useCaseId } from '../../lib/router'
 import { byId, useFocusAfter } from './focusAfter'
 import { BackArrow, NextArrow } from './icons'
 import { ReflectGrowth } from './ReflectGrowth'
-import { submitRoom, useRoom } from './room'
+import { restartRoom, submitRoom, useRoom } from './room'
 import { RoomBoard } from './RoomBoard'
 import { RoomBrief } from './RoomBrief'
 import { RoomConflicts } from './RoomConflicts'
@@ -37,7 +37,10 @@ function Room({ content, script }: { content: CaseContent; script: RoomScript })
   const { session, readOnly, update } = useRoom(content, script)
   const roles = content.roles ?? []
   const roleTitle = (id: string) => roles.find((role) => role.id === id)?.title ?? id
-  const positioned = session.initialPosition.recommendation.trim() !== ''
+  // The whole initial position (recommendation, why, confidence) before anyone talks: it locks
+  // when the discussion starts, so a half-written one could never be finished.
+  const position = session.initialPosition
+  const positioned = position.recommendation.trim() !== '' && position.reason.trim() !== '' && position.confidence !== null
   const planned = session.recommendation.plan.trim() !== ''
   const canTalk = !readOnly && positioned
   const canSubmit = !readOnly && positioned && planned
@@ -51,6 +54,12 @@ function Room({ content, script }: { content: CaseContent; script: RoomScript })
         : 'Your Team Lead can review it once you submit'
 
   // Submit stays focusable while it can't be used (aria-disabled), so its reason can be heard.
+  const restart = () => {
+    if (!window.confirm('Start the room again? This discussion is set aside and you write a new initial position.')) return
+    focusAfter(byId('jr-room-rec'))
+    restartRoom(content)
+  }
+
   const submit = () => {
     if (!canSubmit) return
     focusAfter(byId('jr-room-done'))
@@ -86,7 +95,7 @@ function Room({ content, script }: { content: CaseContent; script: RoomScript })
           <RoomBoard script={script} session={session} roleTitle={roleTitle} readOnly={readOnly} update={update} />
         </div>
         <div className="jr-room__main">
-          <RoomPosition session={session} update={update} />
+          <RoomPosition session={session} update={update} onRestart={restart} />
           <RoomDiscussion script={script} session={session} roleTitle={roleTitle} canTalk={canTalk} update={update} />
           <RoomConflicts script={script} session={session} roleTitle={roleTitle} readOnly={readOnly} update={update} />
           <RoomRecommendation session={session} readOnly={readOnly} update={update} />

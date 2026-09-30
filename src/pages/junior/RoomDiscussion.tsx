@@ -177,7 +177,7 @@ export function RoomDiscussion({ script, session, roleTitle, canTalk, update }: 
         </>
       ) : (
         session.status === 'in-progress' && (
-          <p className="callout jr-talk__locked">Write your initial position first. Then talk to the others.</p>
+          <p className="callout jr-talk__locked">Write your recommendation, why and confidence first. Then talk to the others.</p>
         )
       )}
       <div className="visually-hidden" aria-live="polite">
