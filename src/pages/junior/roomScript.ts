@@ -45,6 +45,21 @@ export function matchReply(script: RoomScript, toRoleId: string, text: string): 
   return reply && { text: reply.text, replyId: reply.id }
 }
 
+// Every role in the room: the default human role, the AI roles, and any other playable role.
+export function roomRoleIds(script: RoomScript): string[] {
+  return [...new Set([script.humanRoleId, ...script.aiRoleIds, ...(script.playableRoleIds ?? [])])]
+}
+
+// The roles a learner may choose to play (types.ts RoomScript.playableRoleIds).
+export function playableRoleIds(script: RoomScript): string[] {
+  return script.playableRoleIds?.length ? script.playableRoleIds : [script.humanRoleId]
+}
+
+// The AI roles when the learner plays roleId: every other role in the room.
+export function aiRolesFor(script: RoomScript, roleId: string): string[] {
+  return roomRoleIds(script).filter((id) => id !== roleId)
+}
+
 // The questions asked so far, by id: suggested ones, and free text that matched one.
 export function askedIds(session: RoomSession): Set<string> {
   return new Set(
@@ -53,8 +68,10 @@ export function askedIds(session: RoomSession): Set<string> {
 }
 
 // A conflict counts as found once every question that reveals it has been asked.
+// A question to the role the learner plays counts as asked: they already hold that information.
 export function foundConflicts(script: RoomScript, session: RoomSession) {
   const asked = askedIds(session)
+  for (const q of script.questions) if (q.toRoleId === session.roleId) asked.add(q.id)
   return (script.conflicts ?? []).filter((c) => c.revealedBy.length > 0 && c.revealedBy.every((id) => asked.has(id)))
 }
 

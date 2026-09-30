@@ -31,6 +31,11 @@ describe('router', () => {
     }
   })
 
+  it('reads the draft a Create a Case link reopens', () => {
+    expect(matchHash(`${ROUTES.seniorNew}?draft=draft-1`, empty)).toMatchObject({ route: 'seniorNew', draftId: 'draft-1' })
+    expect(matchHash(`${ROUTES.seniorNew}?draft=`, empty).draftId).toBeUndefined()
+  })
+
   it('sends a fixed route with no screen to its target, like a dead URL', () => {
     expect(REDIRECTED.juniorInProgress).toBe('juniorHome')
     for (const [from, to] of Object.entries(REDIRECTED) as [FixedRoute, FixedRoute][]) {

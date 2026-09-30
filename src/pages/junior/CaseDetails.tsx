@@ -6,7 +6,7 @@ import { DetailsModes, type Mode } from './DetailsModes'
 import { DetailsPreview } from './DetailsPreview'
 import { BackArrow, NextArrow } from './icons'
 import { exampleOf, startPractice, useCurrentAttempt, viewExample } from './practice'
-import { enterRoom } from './room'
+import { enterRoom, useCurrentRoom } from './room'
 import './CaseFrame.css'
 import './CaseDetails.css'
 
@@ -17,17 +17,21 @@ export function CaseDetails() {
   const caseId = useCaseId()
   const [mode, setMode] = useState<Mode>('individual')
   const attempt = useCurrentAttempt(caseId)
+  const room = useCurrentRoom(caseId)
+  // The role to play in the room: the one chosen here, else the one of a session in progress.
+  const [chosenRole, setChosenRole] = useState<string>()
   const summary = CASE_SUMMARIES.find((s) => s.id === caseId)
   if (!summary) return null
 
   const content = isPlayable(caseId) ? getCase(caseId) : undefined
   const example = content && exampleOf(content)
   const inProgress = attempt?.status === 'in-progress'
+  const roleId = chosenRole ?? (room?.status === 'in-progress' ? room.roleId : content?.room?.humanRoleId) ?? ''
 
   let actions = <p className="jr-details__note">Practice for this case isn’t open yet.</p>
   if (content && mode === 'team') {
     actions = (
-      <a className="btn btn--primary" href={casePageHref(caseId, 'room')} onClick={() => enterRoom(content)}>
+      <a className="btn btn--primary" href={casePageHref(caseId, 'room')} onClick={() => enterRoom(content, roleId)}>
         Enter the room
         <NextArrow />
       </a>
@@ -62,7 +66,15 @@ export function CaseDetails() {
         <div className="jr-details__grid">
           <About summary={summary} fallbackText={content?.brief} submits={content?.submission?.name} />
           {content ? (
-            <DetailsModes content={content} mode={mode} onMode={setMode} example={!!example} attempt={attempt} />
+            <DetailsModes
+              content={content}
+              mode={mode}
+              onMode={setMode}
+              example={!!example}
+              attempt={attempt}
+              roleId={roleId}
+              onRole={setChosenRole}
+            />
           ) : (
             <DetailsPreview summary={summary} />
           )}

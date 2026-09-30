@@ -12,6 +12,7 @@ import {
   IconDocument,
   IconFolder,
   IconGrid,
+  IconHome,
   IconLayers,
   IconList,
   IconMenu,
@@ -40,8 +41,9 @@ const unreadFeedback = (store: Store) => unreadFeedbackCount(store, demoPerson('
 // Navigation from requirements §2. Each role starts on ROLE_HOME (lib/roles.ts).
 const NAV: Record<Role, NavItem[]> = {
   senior: [
-    { label: 'My Cases', icon: IconFolder, to: 'seniorCases', activeOn: ['seniorCases'] },
-    { label: 'Create a Case', icon: IconPlus, to: 'seniorShare', activeOn: ['seniorShare', 'seniorBreakdown'] },
+    // Share and Breakdown show the case My Cases opened.
+    { label: 'My Cases', icon: IconFolder, to: 'seniorCases', activeOn: ['seniorCases', 'seniorShare', 'seniorBreakdown'] },
+    { label: 'Create a Case', icon: IconPlus, to: 'seniorNew', activeOn: ['seniorNew'] },
     { label: 'Skill Frameworks', icon: IconLayers, to: 'seniorSkills', activeOn: ['seniorSkills'] },
   ],
   junior: [
@@ -142,6 +144,11 @@ export function Sidebar({ role, route }: { role: Role; route: RouteKey }) {
           </div>
 
           <nav className="sidebar__nav" aria-label={`${ROLE_LABELS[role]} navigation`}>
+            {/* One click back to the landing page from anywhere (the logo goes there too, but doesn't look like a link). */}
+            <a className="navitem" href={ROUTES.landing}>
+              <IconHome />
+              <span className="sidebar__nav-label">Home</span>
+            </a>
             {nav.map((item, i) => (
               <a
                 key={item.label}

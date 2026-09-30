@@ -77,18 +77,21 @@ function problemsIn(c: CaseContent): string[] {
     if (!roleIds.has(r.humanRoleId)) at(`room human role ${r.humanRoleId} is missing`)
     for (const id of r.aiRoleIds) if (!roleIds.has(id) || id === r.humanRoleId) at(`room AI role ${id} is missing or is the human`)
     if (!sequential(r.questions.map((q) => q.id), 'q')) at('room questions must be q1, q2 … in order')
+    // With playableRoleIds, any role in the room can be an AI role (the one the learner plays is hidden).
+    for (const id of r.playableRoleIds ?? []) if (id !== r.humanRoleId && !r.aiRoleIds.includes(id)) at(`playable role ${id} is not in the room`)
+    const askable = r.playableRoleIds ? [r.humanRoleId, ...r.aiRoleIds] : r.aiRoleIds
     for (const q of r.questions) {
-      if (!r.aiRoleIds.includes(q.toRoleId)) at(`${q.id} asks ${q.toRoleId}, which is not an AI role`)
+      if (!askable.includes(q.toRoleId)) at(`${q.id} asks ${q.toRoleId}, which is not an AI role`)
       if (q.materialId && !materialIds.has(q.materialId)) at(`${q.id} cites missing material ${q.materialId}`)
     }
-    for (const id of Object.keys(r.challengeReplies ?? {})) if (!r.aiRoleIds.includes(id)) at(`challenge reply for non-AI role ${id}`)
+    for (const id of Object.keys(r.challengeReplies ?? {})) if (!askable.includes(id)) at(`challenge reply for non-AI role ${id}`)
     for (const q of r.questions) {
       const m = c.materials.find((x) => x.id === q.materialId)
       if (!m || m.roleId !== q.toRoleId) at(`${q.id} must cite a material held by ${q.toRoleId}`)
     }
     const qIds = new Set(r.questions.map((q) => q.id))
     for (const k of r.conflicts ?? []) for (const q of k.revealedBy) if (!qIds.has(q)) at(`conflict ${k.id} names missing question ${q}`)
-    for (const k of r.replies ?? []) if (!r.aiRoleIds.includes(k.toRoleId)) at(`reply ${k.id} goes to non-AI role ${k.toRoleId}`)
+    for (const k of r.replies ?? []) if (!askable.includes(k.toRoleId)) at(`reply ${k.id} goes to non-AI role ${k.toRoleId}`)
   }
   return p
 }

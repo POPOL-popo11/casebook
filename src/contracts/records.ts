@@ -275,6 +275,21 @@ export interface SelfReview {
 // ---------------------------------------------------------------------------
 // The store
 // ---------------------------------------------------------------------------
+// A case a Case Expert started on Create a Case: saved as a draft only. It is not playable and not
+// in the Case Library; My Cases lists it as a draft.
+export interface CaseDraft {
+  id: string // 'draft-…'
+  authorId: PersonId
+  createdAt: ISODate
+  updatedAt: ISODate
+  title: string
+  teamId?: string // a TEAMS id (data/teams.ts)
+  goal: string
+  limits: string
+  materials: { title: string; body: string }[]
+  decisions: string[] // the four decision points, in order
+}
+
 export interface Store {
   version: 1
   seedVersion: number // SEED_VERSION of the seed it started from
@@ -285,6 +300,7 @@ export interface Store {
   shares: Share[]
   feedback: Feedback[]
   selfReviews: SelfReview[]
+  caseDrafts?: CaseDraft[] // absent in stores saved before it existed: read as []
   ui: {
     viewMode: Record<CaseId, 'example' | 'practice'> // what the case steps show for each case
     activeAttempt: Record<CaseId, string> // the attempt the steps and reflect page work on

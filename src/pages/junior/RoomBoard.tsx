@@ -3,6 +3,7 @@ import type { RoomSession } from '../../contracts/records'
 import type { RoomScript } from '../../contracts/types'
 import { newId } from '../../lib/records'
 import type { RoomUpdate } from './room'
+import { aiRolesFor } from './roomScript'
 import './fields.css'
 
 type Status = RoomSession['openQuestions'][number]['status']
@@ -26,7 +27,7 @@ type RoomBoardProps = {
 export function RoomBoard({ script, session, roleTitle, readOnly, update }: RoomBoardProps) {
   // The question being written; it joins the list on Add.
   const [text, setText] = useState('')
-  const roles = [script.humanRoleId, ...script.aiRoleIds]
+  const roles = [session.roleId, ...aiRolesFor(script, session.roleId)]
   const [owner, setOwner] = useState(roles[0] ?? '')
   const who = (id: string) => (id === session.roleId ? `You (${roleTitle(id)})` : roleTitle(id))
 

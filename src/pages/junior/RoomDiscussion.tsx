@@ -5,7 +5,7 @@ import type { RoomScript } from '../../contracts/types'
 import { newId } from '../../lib/records'
 import { byId, useFocusAfter } from './focusAfter'
 import { askQuestion, sendMessage, type RoomUpdate } from './room'
-import { askedIds, evidenceText, type LearnerKind } from './roomScript'
+import { aiRolesFor, askedIds, evidenceText, type LearnerKind } from './roomScript'
 import './fields.css'
 
 const KINDS: { id: LearnerKind; label: string }[] = [
@@ -35,7 +35,8 @@ type RoomDiscussionProps = {
 // role, and the learner's own words to one role. Every AI message is marked Demo response and can
 // be added to the shared evidence, keeping its source.
 export function RoomDiscussion({ script, session, roleTitle, canTalk, update }: RoomDiscussionProps) {
-  const [to, setTo] = useState(script.aiRoleIds[0] ?? '')
+  const ai = aiRolesFor(script, session.roleId)
+  const [to, setTo] = useState(ai[0] ?? '')
   const [kind, setKind] = useState<LearnerKind>('question')
   // What the learner is typing; it becomes a message on Send.
   const [text, setText] = useState('')
@@ -112,7 +113,7 @@ export function RoomDiscussion({ script, session, roleTitle, canTalk, update }: 
       )}
       {canTalk ? (
         <>
-          {script.aiRoleIds.map((roleId) => {
+          {ai.map((roleId) => {
             const open = script.questions.filter((q) => q.toRoleId === roleId && !asked.has(q.id))
             return (
               open.length > 0 && (
@@ -144,7 +145,7 @@ export function RoomDiscussion({ script, session, roleTitle, canTalk, update }: 
                 To
               </label>
               <select id="jr-talk-to" className="select jr-talk__to" value={to} onChange={(e) => setTo(e.target.value)}>
-                {script.aiRoleIds.map((roleId) => (
+                {ai.map((roleId) => (
                   <option key={roleId} value={roleId}>
                     To the {roleTitle(roleId)}
                   </option>

@@ -52,7 +52,14 @@ const FIXED = new Map<string, RouteKey>(ROUTE_KEYS.filter((r) => !isPatternRoute
 const PATTERNS = ROUTE_KEYS.filter(isPatternRoute).map((route) => ({ route, parts: ROUTES[route].split('/') }))
 
 // redirect: where a dead URL is sent; the route is already the page at that address.
-export type RouteMatch = { route: RouteKey; caseId: CaseId | null; attemptId: string | null; redirect: string | null }
+// draftId: on Create a Case only, the CaseDraft that '?draft=<id>' reopens.
+export type RouteMatch = {
+  route: RouteKey
+  caseId: CaseId | null
+  attemptId: string | null
+  redirect: string | null
+  draftId?: string | null
+}
 
 const page = (route: RouteKey, params: Params = {}, redirect: string | null = null): RouteMatch => ({
   route,
@@ -62,6 +69,12 @@ const page = (route: RouteKey, params: Params = {}, redirect: string | null = nu
 })
 
 export function matchHash(hash: string, store: Store = getStore()): RouteMatch {
+  // Create a Case is the one route that takes a query: '#/senior/new?draft=<id>'.
+  const [path, query] = hash.split('?')
+  if (path === ROUTES.seniorNew) {
+    const draftId = new URLSearchParams(query ?? '').get('draft')
+    return draftId ? { ...page('seniorNew'), draftId } : page('seniorNew')
+  }
   const fixed = FIXED.get(hash)
   if (fixed) {
     const target = REDIRECTED[fixed as FixedRoute]
@@ -128,6 +141,11 @@ export function useAttemptId(): string {
   const attemptId = useContext(RouteMatchContext)?.attemptId ?? null
   if (attemptId === null) throw new Error('useAttemptId() is only available on the review route')
   return attemptId
+}
+
+// The CaseDraft that Create a Case edits, from '?draft=<id>'; null for a new case.
+export function useDraftId(): string | null {
+  return useContext(RouteMatchContext)?.draftId ?? null
 }
 
 // Mounted once in App: a dead URL is rewritten, in place, to the page App already shows for it.

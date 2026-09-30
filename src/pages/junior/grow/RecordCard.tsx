@@ -1,6 +1,8 @@
+import { useEffect, useRef, useState } from 'react'
 import type { GrowthRecord, Store } from '../../../contracts/records'
 import { DemoData } from './demo'
 import { formatDate, KIND_DOTS, KIND_LABELS, levelLabel, openRef, OUTCOME_LABELS, PROMPTING_LABELS, recordTitle, refLink, skillLabel } from './growContent'
+import { RecordEditor } from './RecordEditor'
 
 type RecordCardProps = {
   record: GrowthRecord
@@ -16,6 +18,21 @@ export function RecordCard({ record, refs, selected, onToggle }: RecordCardProps
   // A Work & Grow record is titled by its first clause; its full situation opens the facts.
   const title = recordTitle(record)
   const situationRow = title.trim() !== record.situation.trim()
+  const [editing, setEditing] = useState(false)
+  const editRef = useRef<HTMLButtonElement>(null)
+  const returnFocus = useRef(false)
+
+  // Save or Cancel hands focus back to the Edit button.
+  useEffect(() => {
+    if (editing || !returnFocus.current) return
+    returnFocus.current = false
+    editRef.current?.focus()
+  }, [editing])
+
+  function done() {
+    returnFocus.current = true
+    setEditing(false)
+  }
 
   return (
     <article className="card mg-record" aria-labelledby={titleId} data-selected={selected}>
@@ -35,55 +52,70 @@ export function RecordCard({ record, refs, selected, onToggle }: RecordCardProps
           />
           Select to share
         </label>
+        {!editing && (
+          <button
+            ref={editRef}
+            type="button"
+            className="btn btn--link mg-record__edit"
+            aria-label={`Edit: ${title || 'Untitled record'}, ${formatDate(record.date)}`}
+            onClick={() => setEditing(true)}
+          >
+            Edit
+          </button>
+        )}
       </header>
       <p className="eyebrow eyebrow--sm mg-record__skill">{skillLabel(record.skillId)}</p>
       <h3 id={titleId} className="title title--sm mg-record__title">
         {title}
       </h3>
-      <dl className="mg-facts">
-        {situationRow && (
+      {editing ? (
+        <RecordEditor record={record} onDone={done} />
+      ) : (
+        <dl className="mg-facts">
+          {situationRow && (
+            <div className="mg-facts__row">
+              <dt>Situation</dt>
+              <dd>{record.situation}</dd>
+            </div>
+          )}
           <div className="mg-facts__row">
-            <dt>Situation</dt>
-            <dd>{record.situation}</dd>
+            <dt>What I did</dt>
+            <dd>{record.contribution || 'Not recorded'}</dd>
           </div>
-        )}
-        <div className="mg-facts__row">
-          <dt>What I did</dt>
-          <dd>{record.contribution || 'Not recorded'}</dd>
-        </div>
-        <div className="mg-facts__row">
-          <dt>Evidence</dt>
-          <dd>
-            {record.evidence.length === 0 ? (
-              'None recorded'
-            ) : (
-              <ul className="mg-evidence">
-                {record.evidence.map((item, i) => (
-                  <li key={i}>
-                    {item.text}
-                    {item.ref && !links.some((l) => l.kind === item.ref?.kind && l.id === item.ref?.id) && (
-                      <>
-                        {' '}
-                        <a className="link mg-evidence__link" href={refLink(item.ref, refs).href} onClick={() => item.ref && openRef(item.ref)}>
-                          {refLink(item.ref, refs).label}
-                        </a>
-                      </>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </dd>
-        </div>
-        <div className="mg-facts__row">
-          <dt>What I learned</dt>
-          <dd>{record.learning || 'Not recorded'}</dd>
-        </div>
-        <div className="mg-facts__row">
-          <dt>Next step</dt>
-          <dd>{record.nextStep || 'Not set'}</dd>
-        </div>
-      </dl>
+          <div className="mg-facts__row">
+            <dt>Evidence</dt>
+            <dd>
+              {record.evidence.length === 0 ? (
+                'None recorded'
+              ) : (
+                <ul className="mg-evidence">
+                  {record.evidence.map((item, i) => (
+                    <li key={i}>
+                      {item.text}
+                      {item.ref && !links.some((l) => l.kind === item.ref?.kind && l.id === item.ref?.id) && (
+                        <>
+                          {' '}
+                          <a className="link mg-evidence__link" href={refLink(item.ref, refs).href} onClick={() => item.ref && openRef(item.ref)}>
+                            {refLink(item.ref, refs).label}
+                          </a>
+                        </>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </dd>
+          </div>
+          <div className="mg-facts__row">
+            <dt>What I learned</dt>
+            <dd>{record.learning || 'Not recorded'}</dd>
+          </div>
+          <div className="mg-facts__row">
+            <dt>Next step</dt>
+            <dd>{record.nextStep || 'Not set'}</dd>
+          </div>
+        </dl>
+      )}
       <dl className="mg-meta">
         <div>
           <dt>Prompting needed</dt>

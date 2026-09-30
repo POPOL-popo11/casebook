@@ -43,6 +43,7 @@ const SCREENS: Record<RouteKey, ComponentType> = {
   seniorShare: expert('SeniorShare'),
   seniorBreakdown: expert('SeniorBreakdown'),
   seniorSkills: expert('SkillFrameworks'),
+  seniorNew: expert('NewCase'),
   // Learner
   juniorHome: JuniorHome,
   juniorInProgress: JuniorHome, // redirected to the library

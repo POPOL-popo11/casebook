@@ -4,6 +4,7 @@ import type { CaseContent, Confidence } from '../../contracts/types'
 import { AnswerList } from './DimensionCard'
 import type { AnswerItem } from './attemptAnswers'
 import { roleTitle, RoomConflicts, RoomInformation } from './RoomInformation'
+import { RoomNotAsked } from './RoomNotAsked'
 
 const CONFIDENCE: Record<Confidence, string> = { low: 'Low', medium: 'Medium', high: 'High' }
 
@@ -22,7 +23,7 @@ function Card({ id, title, children }: { id: string; title: string; children: Re
 }
 
 // A Team Decision Room on its review page: the position before and after, what was asked, shared
-// and used, the conflicts, what is still unresolved, and the learner's reflection.
+// and used, what was never asked, the conflicts, what is still unresolved, and the learner's reflection.
 export function RoomReview({ content, room }: { content: CaseContent; room: RoomSession }) {
   const { initialPosition: first, recommendation: final, reflection } = room
   const open = room.openQuestions.filter((q) => q.status !== 'resolved')
@@ -54,6 +55,7 @@ export function RoomReview({ content, room }: { content: CaseContent; room: Room
       </Card>
 
       <RoomInformation content={content} room={room} />
+      <RoomNotAsked content={content} room={room} />
       <RoomConflicts content={content} room={room} />
 
       <Card id="rv-unresolved" title="Still unresolved">

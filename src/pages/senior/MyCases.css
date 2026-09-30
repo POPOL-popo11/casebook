@@ -136,6 +136,10 @@
     grid-column: 2;
   }
 
+  .mc-row__cell:empty {
+    display: none;
+  }
+
   /* The label is drawn for the eye only: the cell's hidden label already reads it out. The
      first line is for browsers without alternative text on generated content. */
   .mc-row__cell[data-label]::before {
@@ -148,4 +152,14 @@
     grid-template-columns: minmax(0, 1fr);
     gap: 2px;
   }
+}
+
+/* Drafts saved on Create a Case, under the library. */
+.mc-drafts {
+  margin-top: var(--space-6);
+  padding-top: 22px;
+}
+
+.mc-drafts__title {
+  margin: 0 0 4px;
 }

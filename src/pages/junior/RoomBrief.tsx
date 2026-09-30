@@ -3,6 +3,7 @@ import type { CaseRole, RoomScript } from '../../contracts/types'
 import { byId, useFocusAfter } from './focusAfter'
 import type { RoomUpdate } from './room'
 import { shareFact } from './room'
+import { aiRolesFor } from './roomScript'
 
 type RoomBriefProps = {
   roles: CaseRole[]
@@ -24,9 +25,10 @@ export const initialsOf = (title: string) =>
 // 'My role brief' and 'Participants' in the Decision Room's left column. What only the learner's
 // role knows can be shared with everyone; it then joins the shared evidence with its source.
 export function RoomBrief({ roles, script, session, canTalk, update }: RoomBriefProps) {
-  const mine = roles.find((role) => role.id === script.humanRoleId)
+  const mine = roles.find((role) => role.id === session.roleId)
   const shared = new Set(session.sharedEvidence.filter((e) => e.sourceRoleId === session.roleId).map((e) => e.text))
-  const others = roles.filter((role) => role.id !== script.humanRoleId && script.aiRoleIds.includes(role.id))
+  const ai = aiRolesFor(script, session.roleId)
+  const others = roles.filter((role) => ai.includes(role.id))
   // Share is replaced by the Shared badge, which takes focus; any answer is announced in Discussion.
   const focusAfter = useFocusAfter()
 
@@ -87,11 +89,11 @@ export function RoomBrief({ roles, script, session, canTalk, update }: RoomBrief
         <ul className="jr-people">
           {[...(mine ? [mine] : []), ...others].map((role) => (
             <li key={role.id} className="jr-people__item">
-              <span className={role.id === script.humanRoleId ? 'avatar avatar--accent' : 'avatar'} aria-hidden="true">
+              <span className={role.id === session.roleId ? 'avatar avatar--accent' : 'avatar'} aria-hidden="true">
                 {initialsOf(role.title)}
               </span>
               <span className="jr-people__name">{role.title}</span>
-              {role.id === script.humanRoleId ? (
+              {role.id === session.roleId ? (
                 <span className="badge badge--accent">You · human</span>
               ) : (
                 <span className="badge badge--neutral">AI role</span>

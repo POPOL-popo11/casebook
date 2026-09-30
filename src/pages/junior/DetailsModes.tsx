@@ -1,6 +1,7 @@
 import type { PracticeAttempt } from '../../contracts/records'
 import { casePageHref, type CaseContent } from '../../contracts/types'
 import { IconCheckCircle, NextArrow } from './icons'
+import { aiRolesFor, playableRoleIds } from './roomScript'
 
 export type Mode = 'individual' | 'team'
 
@@ -10,14 +11,18 @@ type DetailsModesProps = {
   onMode: (mode: Mode) => void
   example: boolean
   attempt?: PracticeAttempt
+  roleId: string // the role the learner will play in the Team Decision Room
+  onRole: (roleId: string) => void
 }
 
 // 'Practise it' on a playable case's details page: Individual practice, and the Team Decision
 // Room when the case has one. The note under them says what the buttons below will do.
-export function DetailsModes({ content, mode, onMode, example, attempt }: DetailsModesProps) {
+export function DetailsModes({ content, mode, onMode, example, attempt, roleId, onRole }: DetailsModesProps) {
   const roles = content.roles ?? []
   const roleTitle = (id: string) => roles.find((role) => role.id === id)?.title ?? id
   const room = content.room
+  const playable = room ? playableRoleIds(room) : []
+  const ai = room ? aiRolesFor(room, roleId) : []
 
   return (
     <section className="card jr-modes" aria-labelledby="jr-modes-title">
@@ -35,13 +40,27 @@ export function DetailsModes({ content, mode, onMode, example, attempt }: Detail
           <ModeOption
             pressed={mode === 'team'}
             label="Team Decision Room"
-            line={`You play the ${roleTitle(room.humanRoleId)}. ${listText(room.aiRoleIds.map(roleTitle))} ${
-              room.aiRoleIds.length === 1 ? 'is an AI role' : 'are AI roles'
+            line={`You play the ${roleTitle(roleId)}. ${listText(ai.map(roleTitle))} ${
+              ai.length === 1 ? 'is an AI role' : 'are AI roles'
             }.`}
             onPress={() => onMode('team')}
           />
         )}
       </div>
+      {mode === 'team' && playable.length > 1 && (
+        <div className="field jr-modes__roles">
+          <span id="jr-modes-role" className="field__label">
+            Choose your role
+          </span>
+          <div className="jr-chips" role="group" aria-labelledby="jr-modes-role">
+            {playable.map((id) => (
+              <button key={id} type="button" className="chip" aria-pressed={id === roleId} onClick={() => onRole(id)}>
+                {roleTitle(id)}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       {mode === 'team' ? (
         <p className="jr-modes__note">
           The AI roles answer only from their own brief. Their answers are preset and marked Demo response.

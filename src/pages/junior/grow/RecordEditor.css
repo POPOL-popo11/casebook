@@ -1,0 +1,52 @@
+/* Edit mode of a My Growth record card: the facts become fields, in the card's own spacing. */
+.mg-edit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 16px 0 0;
+}
+
+.mg-edit__fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.mg-edit__fieldset legend {
+  margin-bottom: var(--space-2);
+  padding: 0;
+}
+
+.mg-edit__none {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+}
+
+.mg-edit__evidence {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--space-3);
+}
+
+.mg-edit__remove {
+  margin-top: 12px;
+  font-size: var(--text-sm);
+}
+
+.mg-edit__add {
+  align-self: flex-start;
+  margin-top: 4px;
+  font-size: var(--text-sm);
+}
+
+.mg-edit__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.mg-record__edit {
+  font-size: var(--text-sm);
+}

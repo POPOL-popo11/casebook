@@ -64,7 +64,8 @@
   margin-top: 22px;
 }
 
-.jr-details .chip {
+.jr-about .chip,
+.jr-preview .chip {
   box-sizing: border-box;
   height: 29px;
   color: var(--color-text-2);
@@ -176,4 +177,9 @@
   .jr-details__grid {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* Choose your role, under the modes when the room has more than one playable role */
+.jr-modes__roles {
+  margin-top: 18px;
 }

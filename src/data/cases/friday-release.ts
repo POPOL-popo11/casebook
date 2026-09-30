@@ -1,6 +1,6 @@
 import type { CaseContent } from '../../contracts/types'
 
-// Friday Release: Roll Back or Patch?, shared by Ravi S. (Engineering). Individual mode only.
+// Friday Release: Roll Back or Patch?, shared by Ravi S. (Engineering). Individual and team mode.
 // The source gives the task, the material names, what the requested materials reveal (the problem
 // sits in one retry path, and the complaints don't prove every payment was charged twice), the
 // submission, the three Team Lead observations and the follow-up. Every fact beyond those, and all
@@ -49,10 +49,11 @@ export const CASE: CaseContent = {
       id: 'm4',
       title: 'Breakdown by affected payment method',
       visibility: 'request',
-      body: 'Method | Share of payments | Success since release | Usual Friday | Orders with two authorisations\nCards | 80% | 97.5% | 97.9% | 37\nDigital wallets | 12% | 98.9% | 98.9% | 0\nBank debit | 8% | 99.1% | 99.2% | 0',
+      body: 'Method | Share of payments | Success since release | Usual Friday | Orders with two authorisations\nCards | 80% | 97.5% | 97.9% | 37\nDigital wallets | 12% | 98.9% | 98.9% | 0\nBank debit | 8% | 99.1% | 99.1% | 0', // DRAFT: to be confirmed. Usual Friday for bank debit set to 99.1% so 'Only card payments dipped' (r1) holds; the overall usual rate still rounds to 98.1%.
       source: 'Payments dashboard, split by method',
       date: 'Saturday, 09:30',
       scope: 'Friday 15:00 to Saturday 09:00, by payment method only',
+      roleId: 'on-call-engineer', // DRAFT: to be confirmed (team mode)
     },
     // The source: the problem concentrates in one retry path, and the complaints don't yet prove
     // that every payment was charged twice.
@@ -64,6 +65,7 @@ export const CASE: CaseContent = {
       source: 'Payments service logs, pulled by the on-call engineer',
       date: 'Saturday, 10:00',
       scope: 'Card payments since the release; what happens to the pending holds is not known yet',
+      roleId: 'on-call-engineer', // DRAFT: to be confirmed (team mode)
     },
     // The source: a rollback's impact must be confirmed first.
     {
@@ -74,6 +76,7 @@ export const CASE: CaseContent = {
       source: 'Payments team runbook',
       date: 'Last updated Friday, 14:00',
       scope: 'Release 2.14 only',
+      roleId: 'release-engineer', // DRAFT: to be confirmed (team mode)
     },
     {
       id: 'm7',
@@ -83,6 +86,7 @@ export const CASE: CaseContent = {
       source: 'On-call rota and incident process',
       date: 'This weekend',
       scope: 'Payments incidents only',
+      roleId: 'support-lead', // DRAFT: to be confirmed (team mode)
     },
   ],
   framePrompt: 'Success is near normal. Does that make the impact small?', // DRAFT: to be confirmed
@@ -568,5 +572,152 @@ export const CASE: CaseContent = {
       'Engineering: Release 2.14 also carried a late hotfix that is not in the change summary. It fixed refunds failing on cards issued abroad. About 300 of those refunds had failed since Wednesday and are now going through. Rolling back 2.14 would stop them again.',
     lookFor:
       "Whether the learner weighs the rollback's new cost, about 300 refunds stopping again, against the double charges, and picks a narrower action instead of rolling back by habit; and whether they check that switching off the retry leaves the refund fix alone. The source's question: how would you choose the action again?",
+  },
+  // Team mode, short. DRAFT: to be confirmed: the three roles (the source lists Engineering, Customer
+  // Support and Product; no material belongs to Product, so the room has none), each goal, limits,
+  // canNegotiate and cannotDecide. Each role's knows is taken from the material it holds: m6 for the
+  // Release Engineer, m4 and m5 for the On-call Engineer, m7 for the Support Lead.
+  roles: [
+    {
+      id: 'release-engineer',
+      title: 'Release Engineer',
+      goal: 'Stop the double charges without undoing more of release 2.14 than needed.',
+      knows: [
+        'A rollback to 2.13 takes about 40 minutes and undoes both changes in 2.14, the timeout retry and the dashboard labels.',
+        'After a rollback, timed-out card payments fail as they did before 2.14, and customers try again themselves.',
+        'Without a rollback, the timeout retry has its own switch, and can be turned off in about 5 minutes.',
+      ],
+      limits: 'Recommends the action. Any rollback or switch change to live payments needs the incident manager.',
+      canNegotiate: 'The action, when it happens, and what must be true before the retry is switched back on.',
+      cannotDecide: 'A rollback, a switch change or a customer message: the incident manager approves those.',
+    },
+    {
+      id: 'on-call-engineer',
+      title: 'On-call Engineer',
+      goal: 'Show from the payment records where the double charges come from.',
+      knows: [
+        'Cards: 97.5% success since the release, against 97.9% on a usual Friday. 37 card orders have two authorisations; digital wallets and bank debit have none.',
+        'All 37 are on the timeout retry path, none elsewhere. 12 were captured twice; 25 have the first authorisation still pending.',
+        'Tickets 1 and 2 match orders captured twice. Ticket 3 matches a pending hold. Whether any of the 25 holds will still be captured is not known yet.',
+      ],
+      limits: 'Knows what the records show since the release, not what will happen to the pending holds.',
+      canNegotiate: 'Which records to check next, and what to watch after a change.',
+      cannotDecide: 'A rollback, a switch change or a customer message: the incident manager approves those.',
+    },
+    {
+      id: 'support-lead',
+      title: 'Support Lead',
+      goal: 'Put right the customers who were charged twice, and keep them told.',
+      knows: [
+        'Customer Support sends customer updates, and issues refunds once the incident manager confirms the list of orders.',
+        'The incident manager approves any rollback or switch change to live payments, and any message to customers about an incident.',
+      ],
+      limits: "Can't refund until the incident manager confirms the list of orders, or send an incident message they haven't approved.",
+      canNegotiate: 'What customers are told, when, and in what order refunds go out.',
+      cannotDecide: 'Which orders are refunded, or any change to live payments.',
+    },
+  ],
+  // DRAFT: to be confirmed. The learner plays the Release Engineer; every answer comes only from the
+  // asked role's own material (materialId).
+  room: {
+    humanRoleId: 'release-engineer',
+    aiRoleIds: ['on-call-engineer', 'support-lead'],
+    questions: [
+      {
+        id: 'q1',
+        toRoleId: 'on-call-engineer',
+        text: 'Is the problem in every payment method?',
+        answer:
+          'Cards: 97.5% since the release, against 97.9% on a usual Friday, and 37 orders with two authorisations. Digital wallets and bank debit have no orders with two authorisations.',
+        reveals: 'Only card orders have two authorisations: 37',
+        materialId: 'm4',
+      },
+      {
+        id: 'q2',
+        toRoleId: 'on-call-engineer',
+        text: 'Where do the double authorisations come from?',
+        answer: 'All 37 are on the timeout retry path. None elsewhere. 1,240 timed-out card payments were retried.',
+        reveals: 'All 37 are on the timeout retry path',
+        materialId: 'm5',
+      },
+      {
+        id: 'q3',
+        toRoleId: 'on-call-engineer',
+        text: 'How many customers were really charged twice?',
+        answer:
+          '12 orders were captured twice, so those customers were charged twice. The other 25 have the first authorisation still pending: a hold, not yet a charge. Tickets 1 and 2 match orders captured twice. Ticket 3 matches a pending hold.',
+        reveals: '12 charged twice, 25 pending holds; Ticket 3 is a hold',
+        materialId: 'm5',
+      },
+      {
+        id: 'q4',
+        toRoleId: 'on-call-engineer',
+        text: 'Will the 25 pending holds turn into charges?',
+        answer: "I don't know yet. The logs don't show whether any of the 25 holds will still be captured.",
+        reveals: 'Unknown whether the 25 holds will be captured',
+        materialId: 'm5',
+      },
+      {
+        id: 'q5',
+        toRoleId: 'support-lead',
+        text: 'When can Support refund the customers?',
+        answer: 'Once the incident manager confirms the list of orders. Then we issue the refunds.',
+        reveals: 'Refunds wait for the incident manager to confirm the list of orders',
+        materialId: 'm7',
+      },
+      {
+        id: 'q6',
+        toRoleId: 'support-lead',
+        text: 'Who approves a change to live payments, or a message to customers?',
+        answer:
+          'The incident manager approves any rollback or switch change to live payments, and any message to customers about an incident. Support sends the updates.',
+        reveals: 'The incident manager approves live changes and customer messages',
+        materialId: 'm7',
+      },
+    ],
+    unknownAnswer: 'That isn’t in my brief, so I don’t know.',
+    replies: [
+      {
+        id: 'oncall-rollback',
+        toRoleId: 'on-call-engineer',
+        ifMentions: ['roll back', 'rollback', 'switch off', 'turn off', 'patch'],
+        text: 'All 37 double authorisations are on the timeout retry path, none elsewhere. Whatever we do, nobody knows yet whether any of the 25 pending holds will still be captured.',
+        materialId: 'm5',
+      },
+      {
+        id: 'support-refund',
+        toRoleId: 'support-lead',
+        ifMentions: ['refund'],
+        text: 'We can issue the refunds once the incident manager confirms the list of orders.',
+        materialId: 'm7',
+      },
+      {
+        id: 'support-update',
+        toRoleId: 'support-lead',
+        ifMentions: ['tell', 'email', 'message', 'update', 'notify'],
+        text: "We send the updates, but any message to customers about the incident needs the incident manager's approval first.",
+        materialId: 'm7',
+      },
+    ],
+    challengeReplies: {
+      'on-call-engineer':
+        "I can only tell you what the records show: 37 double authorisations, all on the timeout retry path; 12 captured twice and 25 pending holds. I don't know yet what happens to those holds.",
+      'support-lead':
+        'I want these customers put right too. But we refund once the incident manager confirms the list of orders, and we send nothing about the incident until they approve it.',
+    },
+    conflicts: [
+      {
+        id: 'holds-vs-refund-list',
+        text: 'Support refunds only the orders the incident manager confirms, but nobody knows yet whether the 25 pending holds will be captured.',
+        between: ['on-call-engineer', 'support-lead'],
+        revealedBy: ['q4', 'q5'],
+      },
+      {
+        id: 'switch-vs-approval',
+        text: 'The retry can be switched off in about 5 minutes, but only the incident manager can approve a change to live payments.',
+        between: ['release-engineer', 'support-lead'],
+        revealedBy: ['q6'],
+      },
+    ],
   },
 }

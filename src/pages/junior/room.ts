@@ -5,12 +5,12 @@ import { getSummary } from '../../lib/content'
 import { activeRoomId } from '../../lib/queries'
 import { newId, setStore, useStore } from '../../lib/records'
 import { LEARNER_ID } from './practice'
-import { matchReply, replyTo, saveFoundConflicts, type LearnerKind } from './roomScript'
+import { aiRolesFor, matchReply, replyTo, saveFoundConflicts, type LearnerKind } from './roomScript'
 
 // The Team Decision Room through the shared store (contracts/records.ts RoomSession). Every input
 // writes through as it changes; the session is the active room for the case (ui.activeRoom).
 
-function blankRoom(content: CaseContent, script: RoomScript): RoomSession {
+function blankRoom(content: CaseContent, script: RoomScript, roleId = script.humanRoleId): RoomSession {
   const now = new Date().toISOString()
   return {
     id: newId('room'),
@@ -18,7 +18,7 @@ function blankRoom(content: CaseContent, script: RoomScript): RoomSession {
     caseId: content.id,
     caseVersion: getSummary(content.id).version,
     learnerId: LEARNER_ID,
-    roleId: script.humanRoleId,
+    roleId,
     startedAt: now,
     updatedAt: now,
     status: 'in-progress',
@@ -43,21 +43,23 @@ export function useCurrentRoom(caseId: CaseId): RoomSession | undefined {
   return useMemo(() => rooms.find((r) => r.id === id), [rooms, id])
 }
 
-// The session a new one replaces: none, or one already submitted.
-function sessionFor(draft: Store, content: CaseContent, script: RoomScript): RoomSession {
+// The session a new one replaces: none, one already submitted, or (when a role is chosen) one in
+// progress with another role.
+function sessionFor(draft: Store, content: CaseContent, script: RoomScript, roleId?: string): RoomSession {
   let target = currentRoom(draft, content.id)
-  if (!target || target.status !== 'in-progress') {
-    target = blankRoom(content, script)
+  if (!target || target.status !== 'in-progress' || (roleId && target.roleId !== roleId)) {
+    target = blankRoom(content, script, roleId)
     draft.rooms.push(target)
   }
   draft.ui.activeRoom[content.id] = target.id
   return target
 }
 
-// 'Enter the room' on the details page: a new session unless one is in progress.
-export function enterRoom(content: CaseContent): void {
+// 'Enter the room' on the details page, playing roleId: a new session unless one is in progress
+// with that role.
+export function enterRoom(content: CaseContent, roleId?: string): void {
   const script = content.room
-  if (script) setStore((draft) => void sessionFor(draft, content, script))
+  if (script) setStore((draft) => void sessionFor(draft, content, script, roleId))
 }
 
 export type RoomUpdate = (recipe: (session: RoomSession) => void) => void
@@ -118,7 +120,7 @@ export function shareFact(update: RoomUpdate, script: RoomScript, text: string):
     const shared = message({ from: s.roleId, to: 'all', kind: 'share', text, demo: false })
     s.messages.push(shared)
     s.sharedEvidence.push({ id: newId('ev'), text, sourceRoleId: s.roleId, messageId: shared.id, at: shared.at })
-    for (const roleId of script.aiRoleIds) {
+    for (const roleId of aiRolesFor(script, s.roleId)) {
       const reply = matchReply(script, roleId, text)
       if (reply) s.messages.push(message({ from: roleId, to: s.roleId, kind: 'answer', text: reply.text, demo: true, replyId: reply.replyId }))
     }

@@ -17,6 +17,7 @@ const PAGE_NAMES: Record<RouteKey, string> = {
   seniorShare: 'Share a case', // unused: the page names its case (expertCaseHeading)
   seniorBreakdown: 'Review the breakdown',
   seniorSkills: 'Skill Frameworks',
+  seniorNew: 'Create a Case',
   juniorHome: 'Case Library',
   juniorInProgress: 'Case Library',
   juniorGrow: 'Work & Grow',

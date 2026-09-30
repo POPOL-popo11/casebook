@@ -1,0 +1,96 @@
+/* Create a Case (blank): the Share page's two columns and card padding. */
+.nc__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.nc__column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.nc__card {
+  padding: 27px 28px 28px;
+}
+
+.nc__card-title {
+  margin: 0 0 16px;
+}
+
+.nc__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.nc__card .field {
+  gap: 6px;
+}
+
+.nc__textarea {
+  min-height: 68px;
+  resize: none;
+  field-sizing: content;
+}
+
+.nc__note {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text-3);
+  font-size: var(--text-md);
+}
+
+.nc__materials {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nc__material {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.nc__material + .nc__material {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-hairline);
+}
+
+.nc__material-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.nc__add {
+  margin-top: var(--space-4);
+}
+
+.nc__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-4);
+  margin-left: auto;
+}
+
+.nc__error {
+  margin: 0;
+  color: var(--color-warn-ink);
+  font-size: var(--text-md);
+}
+
+@media (max-width: 1100px) {
+  .nc__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

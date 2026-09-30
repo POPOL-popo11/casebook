@@ -5,6 +5,8 @@ import type { CaseId, CaseSummary } from '../contracts/types'
 // Blurbs are the source's English card lines, unchanged. What each case submits, its materials and
 // its team-mode roles are translated from the source's case sections. skillIds map the source's three
 // card abilities (in Chinese) onto the six skills; that mapping is a DRAFT: to be confirmed.
+// minutes: DRAFT: to be confirmed. About 2 min per material and 2 per submission field, to the nearest 5
+// (materials + fields: Japan 9 + 4 → 25, Friday 7 + 5 → 25, Urgent 7 + 5 → 25, Missing 7 + 5 → 25, Faster 7 + 4 → 20, Deal 8 + 5 → 25).
 export const CASE_SUMMARIES: CaseSummary[] = [
   {
     id: 'japan-launch',
@@ -12,7 +14,7 @@ export const CASE_SUMMARIES: CaseSummary[] = [
     shortName: 'Eight Weeks to Japan',
     teamId: 'solutions',
     authorId: 'dana',
-    minutes: 25,
+    minutes: 25, // from the design; the estimate above also gives 25
     focus: 'Facts vs. assumptions',
     playable: true,
     version: 'v1',
@@ -20,7 +22,7 @@ export const CASE_SUMMARIES: CaseSummary[] = [
     skillIds: ['framing', 'investigation', 'collaboration'], // DRAFT: to be confirmed (mapping)
     modes: ['individual', 'team'],
     // DRAFT: to be confirmed. Alone, you ask the Client Lead (r3); in the team room, you play them.
-    yourRole: 'Solutions consultant; the Client Lead in the team room',
+    yourRole: 'Solutions consultant; the Client Lead in the team room (or choose another role)', // DRAFT: to be confirmed. '(or choose another role)' added with the room's role choice.
     submits:
       'A one-page Launch Recommendation: launch scope, preconditions, risk owners, and conditions to stop or adjust',
     // The initial materials, by their titles in cases/japan-launch.ts.
@@ -33,12 +35,12 @@ export const CASE_SUMMARIES: CaseSummary[] = [
     shortName: 'Friday Release', // DRAFT: to be confirmed
     teamId: 'engineering',
     authorId: 'ravi',
-    minutes: 20,
+    minutes: 25, // DRAFT: to be confirmed (estimate, see the note above CASE_SUMMARIES)
     playable: true,
     version: 'v1',
     blurb: 'Most transactions succeed, but a small group of customers may be charged twice. What happens next?',
     skillIds: ['evidence', 'investigation', 'escalation'], // DRAFT: to be confirmed (mapping)
-    modes: ['individual'],
+    modes: ['individual', 'team'], // DRAFT: to be confirmed (team room added)
     yourRole: 'Engineer on the release team', // DRAFT: to be confirmed
     submits:
       'Incident Recommendation: confirmed impact, what is not yet confirmed, recommended action, who to escalate to, and the plan for customer updates',
@@ -52,7 +54,9 @@ export const CASE_SUMMARIES: CaseSummary[] = [
       'Rollback notes',
       'On-call staff details',
     ],
-    roleTitles: ['Engineering', 'Customer Support', 'Product'],
+    // DRAFT: to be confirmed. The room's roles in cases/friday-release.ts; the source listed
+    // Engineering, Customer Support and Product, and no material belongs to Product.
+    roleTitles: ['Release Engineer', 'On-call Engineer', 'Support Lead'],
   },
   {
     id: 'urgent-onboarding',
@@ -60,7 +64,7 @@ export const CASE_SUMMARIES: CaseSummary[] = [
     shortName: 'Urgent Onboarding', // DRAFT: to be confirmed
     teamId: 'risk',
     authorId: 'tom', // DRAFT: to be confirmed
-    minutes: 20, // placeholder
+    minutes: 25, // DRAFT: to be confirmed (estimate, see the note above CASE_SUMMARIES)
     playable: true,
     version: 'v1',
     blurb: 'A valuable customer needs access tomorrow, but their documents tell different stories.',
@@ -86,7 +90,7 @@ export const CASE_SUMMARIES: CaseSummary[] = [
     shortName: 'Missing A$48,000', // DRAFT: to be confirmed
     teamId: 'finance',
     authorId: 'mei', // DRAFT: to be confirmed
-    minutes: 20, // placeholder
+    minutes: 25, // DRAFT: to be confirmed (estimate, see the note above CASE_SUMMARIES)
     playable: true,
     version: 'v1',
     blurb: 'The ledger and bank statement disagree before the reporting deadline. Find out why.',
@@ -112,7 +116,7 @@ export const CASE_SUMMARIES: CaseSummary[] = [
     shortName: 'Faster Onboarding', // DRAFT: to be confirmed; a playable case needs one
     teamId: 'product',
     authorId: 'nadia', // DRAFT: to be confirmed
-    minutes: 20, // placeholder
+    minutes: 20, // DRAFT: to be confirmed (estimate, see the note above CASE_SUMMARIES)
     playable: true,
     version: 'v1',
     blurb: 'A new flow improves completion rates. Is the evidence strong enough to expand it?',
@@ -139,7 +143,7 @@ export const CASE_SUMMARIES: CaseSummary[] = [
     shortName: 'The Deal', // DRAFT: to be confirmed; a playable case needs one
     teamId: 'sales',
     authorId: 'owen', // DRAFT: to be confirmed
-    minutes: 20, // placeholder
+    minutes: 25, // DRAFT: to be confirmed (estimate, see the note above CASE_SUMMARIES)
     playable: true,
     version: 'v1',
     blurb: 'A prospect will sign this week if you promise a feature that is not yet available.',

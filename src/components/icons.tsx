@@ -30,6 +30,14 @@ export const IconDocument = (p: IconProps) => (
   </Svg>
 )
 
+// Home: a house, for the link back to the landing page.
+export const IconHome = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M3 10.5 12 3l9 7.5" />
+    <path d="M5.5 8.5V20a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1V8.5" />
+  </Svg>
+)
+
 // A material: a blank page with a cut corner.
 export const IconFile = (p: IconProps) => (
   <Svg {...p}>

@@ -46,6 +46,7 @@ export const ROUTES = {
   seniorShare: '#/senior/share', // 02-senior-share.png: Create a Case, step 1
   seniorBreakdown: '#/senior/breakdown', // 03-senior-breakdown.png: Create a Case, step 2
   seniorSkills: '#/senior/skills', // new: Skill Frameworks
+  seniorNew: '#/senior/new', // new: Create a Case, a blank form saved as a CaseDraft (records.ts); ?draft=<id> reopens one
   // Learner (role 'junior')
   juniorHome: '#/junior', // 04-junior-home.png: Case Library
   juniorInProgress: '#/junior/in-progress', // kept for old links; not in the navigation
@@ -360,6 +361,11 @@ export interface CaseRole {
 export interface RoomScript {
   humanRoleId: string // a CaseRole id
   aiRoleIds: string[] // the other roles, answered from the script
+  // The roles a learner may choose to play (default: [humanRoleId]). When they play another one, every
+  // other role, humanRoleId included, is an AI role; questions to the role they play are hidden, and
+  // count as asked when checking which conflicts were found (they already hold that information).
+  // Questions, replies and challengeReplies may be addressed to any role in the room.
+  playableRoleIds?: string[]
   questions: RoomQuestion[] // what the human can ask; shown as suggestions per role
   unknownAnswer: string // 'That isn’t in my brief, so I don’t know.'
   // When the human writes to an AI role (a challenge, a proposal, or sharing a fact), the first reply

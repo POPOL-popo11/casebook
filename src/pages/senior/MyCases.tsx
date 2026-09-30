@@ -1,6 +1,10 @@
-import type { CaseSummary, PracticeMode } from '../../contracts/types'
+import type { CaseDraft } from '../../contracts/records'
+import { ROUTES, type CaseSummary, type PracticeMode } from '../../contracts/types'
 import { Page } from '../../components/Page'
 import { CASE_SUMMARIES, isPlayable, personName, skillLabel, TEAMS } from '../../lib/content'
+import { caseDrafts, draftHref } from '../../lib/drafts'
+import { formatDate } from '../../lib/labels'
+import { useStore } from '../../lib/records'
 import { openExpertCase } from './expertCase'
 import './MyCases.css'
 
@@ -67,11 +71,58 @@ function PreviewDetails({ summary }: { summary: CaseSummary }) {
   )
 }
 
-// My Cases: every case in the library, published or in preview. A published case opens on
-// Create a Case (Share, then Breakdown) to show how it is built.
-export function MyCases() {
+// Drafts saved on Create a Case: not in the library. Each opens back in the form.
+function Drafts({ drafts }: { drafts: CaseDraft[] }) {
   return (
-    <Page title="My Cases" subtitle="Every case in the library. Open a published case to see how it is built.">
+    <section className="card mc-list mc-drafts" aria-labelledby="mc-drafts">
+      <h2 id="mc-drafts" className="title title--sm mc-drafts__title">
+        Drafts
+      </h2>
+      <ul className="mc-rows">
+        {drafts.map((draft) => (
+          <li key={draft.id}>
+            <div className="mc-row">
+              <span className="mc-row__case">
+                <span className="mc-row__title">{draft.title}</span>
+                <span className="mc-row__by">Updated {formatDate(draft.updatedAt)}</span>
+              </span>
+              <span className="mc-row__cell" data-label="Function">
+                <Label>Function</Label>
+                {draft.teamId ? teamLabel(draft.teamId) : 'No team'}
+              </span>
+              <span className="mc-row__cell" />
+              <span className="mc-row__cell" />
+              <span className="mc-row__cell">
+                <Label>Status</Label>
+                <span className="badge badge--neutral">Draft</span>
+              </span>
+              <span className="mc-row__action">
+                <a className="btn btn--secondary btn--sm" href={draftHref(draft.id)}>
+                  Open<span className="visually-hidden"> {draft.title}</span>
+                </a>
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+// My Cases: every case in the library, published or in preview. A published case opens on
+// Create a Case (Share, then Breakdown) to show how it is built. Drafts are listed below.
+export function MyCases() {
+  const drafts = useStore(caseDrafts)
+  return (
+    <Page
+      title="My Cases"
+      subtitle="Every case in the library. Open a published case to see how it is built."
+      aside={
+        <a className="btn btn--primary" href={ROUTES.seniorNew}>
+          Create a new case
+        </a>
+      }
+    >
       <section className="card mc-list" aria-label="Cases">
         <div className="mc-row mc-row--head" aria-hidden="true">
           <span>Case</span>
@@ -109,6 +160,7 @@ export function MyCases() {
           })}
         </ul>
       </section>
+      {drafts.length > 0 && <Drafts drafts={drafts} />}
     </Page>
   )
 }

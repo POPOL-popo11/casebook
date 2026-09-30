@@ -712,9 +712,12 @@ export const CASE: CaseContent = {
   ],
   // The lead's ruling: the human plays the Client Lead; Engineering and Operations are AI roles.
   // Every answer comes only from the asked role's own material (materialId).
+  // DRAFT: to be confirmed. The learner may also play Engineering or Operations; the Client Lead is
+  // then an AI role, answering q10–q12, its replies and its challenge reply from m6 and m9 only.
   room: {
     humanRoleId: 'client-lead',
     aiRoleIds: ['engineering-lead', 'operations-lead'],
+    playableRoleIds: ['client-lead', 'engineering-lead', 'operations-lead'],
     questions: [
       {
         id: 'q1',
@@ -790,6 +793,33 @@ export const CASE: CaseContent = {
         answer: "The pilot's size, who covers support, and when we review. I can agree all three with you.",
         materialId: 'm8',
       },
+      // DRAFT: to be confirmed. q10–q12 ask the Client Lead, for a learner playing another role.
+      {
+        id: 'q10',
+        toRoleId: 'client-lead',
+        text: 'Can the launch date move?',
+        answer: "No. The client's promotion date is set and will not move.",
+        reveals: 'The promotion date will not move',
+        materialId: 'm6',
+      },
+      {
+        id: 'q11',
+        toRoleId: 'client-lead',
+        text: 'Would the client accept a smaller first launch?',
+        answer:
+          'Yes. The client stresses the launch date, but can accept opening part of the catalogue first. This is not in the shared brief.',
+        reveals: 'The client can accept part of the catalogue first',
+        materialId: 'm6',
+      },
+      {
+        id: 'q12',
+        toRoleId: 'client-lead',
+        text: 'How was the ¥18M forecast built?',
+        answer:
+          'The founder estimated it from Australian sales, adjusted by hand for Japan. No Japanese demand data was used, and the forecast has not been fully validated.',
+        reveals: 'The forecast is not validated; no Japanese demand data',
+        materialId: 'm9',
+      },
     ],
     unknownAnswer: 'That isn’t in my brief, so I don’t know.',
     // When the human writes to an AI role, the first reply whose words appear answers.
@@ -848,19 +878,40 @@ export const CASE: CaseContent = {
         ifMentions: ['build', 'test', 'engineering', 'code', 'budget'],
         text: "That isn't in my brief. I know what we can handle by hand, not what can be built or tested.",
       },
+      // DRAFT: to be confirmed. The Client Lead's replies, from m6.
+      {
+        id: 'client-smaller-scope',
+        toRoleId: 'client-lead',
+        ifMentions: ['part of the catalogue', 'some products', 'smaller', 'fewer products', 'pilot'],
+        text: 'The client can accept opening part of the catalogue first. The promotion date is set and will not move.',
+        materialId: 'm6',
+      },
+      {
+        id: 'client-delay',
+        toRoleId: 'client-lead',
+        ifMentions: ['delay', 'postpone', 'move the date', 'later date', 'push back'],
+        text: "The client's promotion date is set and will not move. Whatever we propose has to keep it.",
+        materialId: 'm6',
+      },
     ],
     challengeReplies: {
+      // DRAFT: to be confirmed. From m6.
+      'client-lead':
+        'I understand the risk. But the promotion date is set and will not move, and the client stresses it. The client can accept opening part of the catalogue first, so give me a scope I can take to them.',
       'engineering-lead':
         "I hear you, but I can only commit to what we can test. The base scope takes about 6 weeks, three refund scenarios aren't verified, and I have no firm date for them. Tell me the scope and I'll tell you what I can stand behind.",
       'operations-lead':
         "I'm not against it. But I can only promise what we can run: up to 20 manual refunds a day in a pilot. For anything bigger, nobody has estimated the manual load, so I can't tell you whether we have enough people.",
     },
+    // DRAFT: to be confirmed. q10 (the date will not move) was added to the two conflicts with the
+    // Client Lead, so a learner playing another role finds them by asking the Client Lead. Playing the
+    // Client Lead, q10 counts as asked, so nothing changes for that role.
     conflicts: [
       {
         id: 'date-vs-refunds',
         text: 'The promotion date is fixed, but three refund scenarios are not verified.',
         between: ['client-lead', 'engineering-lead'],
-        revealedBy: ['q2'],
+        revealedBy: ['q2', 'q10'],
       },
       {
         id: 'refunds-vs-workload',
@@ -872,7 +923,7 @@ export const CASE: CaseContent = {
         id: 'date-vs-support',
         text: 'The client wants the date, but support is sized only for a pilot.',
         between: ['client-lead', 'operations-lead'],
-        revealedBy: ['q6', 'q7'],
+        revealedBy: ['q6', 'q7', 'q10'],
       },
     ],
   },
