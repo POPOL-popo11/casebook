@@ -93,7 +93,7 @@ export function StepFocus({ review, edit }: { review: WorkReview; edit: Edit }) 
         <h2 id="wg-respond-title" className="title title--sm">
           Is this right?
         </h2>
-        <p className="wg-card__lead">You know your work best. Tell Casebook if it got something wrong.</p>
+        <p className="wg-card__lead">You know your work best. Tell Work Buddy if it got something wrong.</p>
         <div className="wg-responses" role="group" aria-labelledby="wg-respond-title">
           {RESPONSES.map((r) => (
             <button key={r.id} type="button" className="chip" aria-pressed={pressed === r.id} onClick={() => respond(r.id)}>
@@ -104,7 +104,7 @@ export function StepFocus({ review, edit }: { review: WorkReview; edit: Edit }) 
         {correcting && (
           <div className="wg-correct">
             <label className="field">
-              <span className="field__label">What did Casebook miss?</span>
+              <span className="field__label">What did Work Buddy miss?</span>
               <textarea className="textarea jr-grow" rows={3} value={said} placeholder="e.g. what you checked, and with whom" onChange={(e) => setSaid(e.target.value)} />
             </label>
             <button type="button" className="btn btn--primary btn--sm" disabled={!said.trim()} onClick={sendCorrection}>

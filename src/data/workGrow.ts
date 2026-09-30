@@ -80,7 +80,7 @@ export const WORK_GROW: WorkGrowScript = {
     unmatchedCorrection: {
       title: 'A focus you choose',
       reason:
-        'Thanks for correcting this. Casebook has set its suggestion aside. Say what you checked and with whom, or name the skill you want to practise next.',
+        'Thanks for correcting this. Work Buddy has set its suggestion aside. Say what you checked and with whom, or name the skill you want to practise next.',
     },
     moreInfoQuestion: 'Which teams did you check the plan with, and what did each of them say it could support?', // DRAFT: to be confirmed
   },

@@ -71,12 +71,12 @@ export function StepReasoning({ review, edit }: { review: WorkReview; edit: Edit
         <section className="card wg-card" aria-labelledby="wg-questions-title">
           <div className="wg-card__head">
             <h2 id="wg-questions-title" className="title title--sm">
-              Questions from Casebook
+              Questions from Work Buddy
             </h2>
             <DemoResponse />
           </div>
           {asking.length === 0 ? (
-            <p className="wg-card__lead">Your explanation already answers Casebook's questions.</p>
+            <p className="wg-card__lead">Your explanation already answers Work Buddy's questions.</p>
           ) : (
             <>
               <p className="wg-card__lead">Answer the ones that help. They are hints, not a test.</p>
@@ -104,7 +104,7 @@ export function StepReasoning({ review, edit }: { review: WorkReview; edit: Edit
         </section>
       ) : (
         <section className="card card--dashed wg-card wg-card--waiting">
-          <p className="wg-note">Casebook asks its questions after you explain your choices.</p>
+          <p className="wg-note">Work Buddy asks its questions after you explain your choices.</p>
         </section>
       )}
     </div>

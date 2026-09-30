@@ -20,7 +20,7 @@ export function LandingNav() {
     <header className="lp-nav">
       <a className="lp-logo" href={ROUTES.landing} onClick={toTop}>
         <IconDocument className="lp-logo__icon" />
-        <span>Casebook</span>
+        <span>Work Buddy</span>
       </a>
       <nav className="lp-nav__links" aria-label="Sections">
         <a href="#how-it-works" onClick={toSection('how-it-works')}>

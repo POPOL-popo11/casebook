@@ -27,7 +27,7 @@ export function Cta() {
 export function LandingFooter() {
   return (
     <footer className="lp-footer">
-      <span className="title lp-footer__logo">Casebook</span>
+      <span className="title lp-footer__logo">Work Buddy</span>
       <span className="lp-footer__meta">Prototype · FEIT Hackathon 2026</span>
     </footer>
   )

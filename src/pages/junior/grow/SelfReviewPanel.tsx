@@ -67,7 +67,7 @@ export function SelfReviewPanel({ records, feedback }: { records: GrowthRecord[]
         Performance review draft
       </h2>
       <p className="mg-review__lead">
-        Choose a date range and the records to use. Casebook sorts them into Contributions, Growth, Challenges and Next goals, and names the
+        Choose a date range and the records to use. Work Buddy sorts them into Contributions, Growth, Challenges and Next goals, and names the
         records behind every line. It adds nothing the records don't say.
       </p>
       <div className="mg-review__controls">

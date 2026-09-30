@@ -83,7 +83,7 @@ export function SignIn() {
       <header className="si-nav">
         <a className="si-logo" href={ROUTES.landing}>
           <IconDocument className="si-logo__icon" />
-          <span>Casebook</span>
+          <span>Work Buddy</span>
         </a>
         <a className="btn btn--link si-back" href={ROUTES.landing}>
           <Arrow back /> Back to home
@@ -94,7 +94,7 @@ export function SignIn() {
           Prototype · demo accounts
         </p>
         <h1 className="title si-title reveal reveal--title" data-revealed="true">
-          Sign in to Casebook
+          Sign in to Work Buddy
         </h1>
         <div className="si-lead reveal reveal--body" data-revealed="true">
           <p>{HERO_SUB}</p>

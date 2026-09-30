@@ -113,7 +113,7 @@ export function Sidebar({ role, route }: { role: Role; route: RouteKey }) {
         <div className="sidebar__bar">
           <a className="sidebar__logo" href={ROUTES.landing}>
             <IconDocument className="sidebar__logo-icon" />
-            <span>Casebook</span>
+            <span>Work Buddy</span>
           </a>
           <button
             ref={menuRef}

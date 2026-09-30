@@ -4,10 +4,10 @@ import { CASE_SUMMARIES, caseName, FEATURED_CASE_ID, getSummary, personName } fr
 import type { RouteMatch } from './router'
 
 // The browser tab's title on each page, read out when the page changes: the page, then the app,
-// as 'Case Library · Casebook'. A case page names the case first, as
-// 'Eight Weeks to Japan · Define · Casebook'.
+// as 'Case Library · Work Buddy'. A case page names the case first, as
+// 'Eight Weeks to Japan · Define · Work Buddy'.
 
-const APP = 'Casebook'
+const APP = 'Work Buddy'
 
 // The page's name, as the sidebar or the page's own heading calls it.
 const PAGE_NAMES: Record<RouteKey, string> = {

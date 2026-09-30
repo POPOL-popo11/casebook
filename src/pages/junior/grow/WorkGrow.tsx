@@ -147,7 +147,7 @@ export function WorkGrow() {
     <Page
       className="wg gr-page"
       title="Work & Grow"
-      subtitle="AI drafted it. You decided what to send. Casebook looks at the difference: what you changed, checked and still doubt."
+      subtitle="AI drafted it. You decided what to send. Work Buddy looks at the difference: what you changed, checked and still doubt."
       actions={
         <>
           {back}
